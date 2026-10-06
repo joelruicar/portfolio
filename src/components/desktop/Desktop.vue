@@ -1,6 +1,10 @@
+<script setup lang="ts">
+import Taskbar from '../Taskbar.vue'
+</script>
+
 <template>
   <section class="desktop">
-    <p>desktop</p>
+    <Taskbar />
   </section>
 </template>
 

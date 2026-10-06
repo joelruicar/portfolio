@@ -69,7 +69,7 @@ onUnmounted(() => {
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 10000;
   background: #000;
   overflow: hidden;
   opacity: 1;
