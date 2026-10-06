@@ -59,7 +59,7 @@ onUnmounted(() => clearInterval(timer))
   padding: 2px;
   background: #c0c0c0;
   border-top: 2px solid #fff;
-  z-index: 9999; /* por encima de todas las ventanas */
+  z-index: 9999; 
 }
 .taskbar__items { display: flex; gap: 2px; flex: 1; }
 .tray {
@@ -68,7 +68,7 @@ onUnmounted(() => clearInterval(timer))
   padding: 0 8px;
   height: 100%;
   border: 1px solid;
-  border-color: #808080 #fff #fff #808080; /* borde hundido */
+  border-color: #808080 #fff #fff #808080; 
 }
 .tray {
   margin-left: auto;

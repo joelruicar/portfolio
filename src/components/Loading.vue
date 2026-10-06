@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import videoImage from '../assets/video.webp'
+import lastFrameImage from '../assets/video.png'
 
 const emit = defineEmits<{ finished: [] }>()
 
-const imageSource = `${videoImage}?loading=${Date.now()}`
+const imageSource = ref(`${videoImage}?loading=${Date.now()}`)
+
+// precarga el PNG para que el cambio no parpadee
+const preload = new Image()
+preload.src = lastFrameImage
 
 const animationDuration = 10_560
 const zoomDuration = 2_200
 const fadeStart = 1_500
 const fadeDuration = 800
 
+const drifting = ref(false)
 const zooming = ref(false)
 const fading = ref(false)
 
@@ -20,10 +26,14 @@ const transitionTimers: ReturnType<typeof setTimeout>[] = []
 function startTransition() {
   if (zooming.value) return
   zooming.value = true
+
   if (autoStartTimer !== undefined) {
     clearTimeout(autoStartTimer)
     autoStartTimer = undefined
   }
+
+  // congela en el último fotograma antes del zoom fuerte
+  imageSource.value = lastFrameImage
 
   transitionTimers.push(setTimeout(() => (fading.value = true), fadeStart))
   transitionTimers.push(setTimeout(() => emit('finished'), fadeStart + fadeDuration))
@@ -31,6 +41,11 @@ function startTransition() {
 
 onMounted(() => {
   autoStartTimer = setTimeout(startTransition, animationDuration)
+
+  // dos frames para que la transición parta de scale(1)
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => (drifting.value = true))
+  })
 })
 
 onUnmounted(() => {
@@ -39,27 +54,22 @@ onUnmounted(() => {
 })
 </script>
 
-<<template>
+<template>
   <div class="overlay" :class="{ fading }" :style="{ '--fade': fadeDuration + 'ms' }">
-    <button
-      v-if="!zooming"
-      class="bttn"
-      type="button"
-      @click="startTransition"
-    >
+    <button v-if="!zooming" class="bttn" type="button" @click="startTransition">
       Skip
     </button>
 
     <section id="center" class="viewport">
       <div
         class="stage"
-        :class="{ zooming }"
-        :style="{ '--zoom': zoomDuration + 'ms' }"
+        :class="{ drifting, zooming }"
+        :style="{
+          '--zoom': zoomDuration + 'ms',
+          '--drift': animationDuration + 'ms',
+        }"
       >
-        <picture>
-          <source :srcset="imageSource" type="image/webp">
-          <img :src="imageSource" alt="Cargando">
-        </picture>
+        <img :src="imageSource" alt="Cargando">
       </div>
     </section>
   </div>
@@ -99,11 +109,19 @@ onUnmounted(() => {
   aspect-ratio: 959 / 535;
   transform-origin: 50.8% 40.7%;
   transform: scale(1);
-  transition: transform var(--zoom) cubic-bezier(0.55, 0, 0.85, 0.35);
   will-change: transform;
 }
+
+/* fase 1: zoom lento durante la espera */
+.stage.drifting {
+  transform: scale(1.08);
+  transition: transform var(--drift) linear;
+}
+
+/* fase 2: zoom fuerte (va después, así que gana a .drifting) */
 .stage.zooming {
   transform: scale(5);
+  transition: transform var(--zoom) cubic-bezier(0.3, 0, 0.8, 0.2);
 }
 
 .stage img {
