@@ -8,5 +8,5 @@ const loadingFinished = ref(false)
 
 <template>
   <Desktop />
-  <Loading v-if="!loadingFinished" @finished="loadingFinished = true" />
+  <!-- <Loading v-if="!loadingFinished" @finished="loadingFinished = true" /> -->
 </template>
