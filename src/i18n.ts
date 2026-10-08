@@ -10,6 +10,12 @@ type Translation = {
   minesweeper: string
   language: string
   languageNames: Record<Locale, string>
+  startMenu: {
+    mines: string
+    run: string
+    documents: string
+    settings: string
+  }
   content: {
     about: string
     contact: string
@@ -28,6 +34,12 @@ const translations: Record<Locale, Translation> = {
     minesweeper: 'Buscaminas',
     language: 'Idioma',
     languageNames: { es: 'ES', en: 'EN', de: 'DE' },
+    startMenu: {
+      mines: 'Buscaminas',
+      run: 'CMD',
+      documents: 'LinkedIn',
+      settings: 'Github',
+    },
     file: 'Fichero',
     edit: 'Editar',
     view: 'Ver',
@@ -44,6 +56,12 @@ const translations: Record<Locale, Translation> = {
     minesweeper: 'Minesweeper',
     language: 'Language',
     languageNames: { es: 'ES', en: 'EN', de: 'DE' },
+    startMenu: {
+      mines: 'Minesweeper',
+      run: 'CMD',
+      documents: 'LinkedIn',
+      settings: 'Github',
+    },
     file: 'File',
     edit: 'Edit',
     view: 'View',
@@ -60,6 +78,12 @@ const translations: Record<Locale, Translation> = {
     minesweeper: 'Minesweeper',
     language: 'Sprache',
     languageNames: { es: 'ES', en: 'EN', de: 'DE' },
+    startMenu: {
+      mines: 'Minesweeper',
+      run: 'CMD',
+      documents: 'LinkedInd',
+      settings: 'Github',
+    },
     file: 'Datei',
     edit: 'Bearbeiten',
     view: 'Sehen',

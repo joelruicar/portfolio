@@ -297,6 +297,8 @@ onUnmounted(listenPause)
 }
 
 .minesweeper__grid {
+  display: flex;
+  justify-content: center;
   overflow: auto;
   padding: 3px;
   border: 3px solid;

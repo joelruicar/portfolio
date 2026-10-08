@@ -4,13 +4,15 @@ import { useI18n, type Locale } from '../i18n'
 import { useWindowsStore } from '../stores/windows'
 import StartMenu from './StartMenu.vue'
 import minesweeperIcon from '../assets/minesweeper/img/Icon.png'
-
+import soundIcon from '../assets/sound.svg'
+import start from '../assets/start.ico'
 const store = useWindowsStore()
 const time = ref('')
 const menuOpen = ref(false)
 const { locale, messages, setLocale, locales } = useI18n()
 const languageOpen = ref(false)
 const languageMenu = ref<HTMLElement | null>(null)
+const startMenu = ref<HTMLElement | null>(null)
 let timer: ReturnType<typeof setInterval>
 
 function updateTime() {
@@ -64,20 +66,38 @@ function closeLanguageMenu(event: PointerEvent) {
   }
 }
 
-onMounted(() => document.addEventListener('pointerdown', closeLanguageMenu))
-onUnmounted(() => document.removeEventListener('pointerdown', closeLanguageMenu))
+function closeStartMenu(event: PointerEvent) {
+  if (!startMenu.value?.contains(event.target as Node)) {
+    menuOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('pointerdown', closeLanguageMenu)
+  document.addEventListener('pointerdown', closeStartMenu)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('pointerdown', closeLanguageMenu)
+  document.removeEventListener('pointerdown', closeStartMenu)
+})
 </script>
 
 <template>
   <footer class="taskbar">
-    <button
-      class="start-button"
-      type="button"
-      aria-label="Start"
-      :aria-expanded="menuOpen"
-      @click="menuOpen = !menuOpen"
-    >w</button>
-    <StartMenu v-if="menuOpen" @open-minesweeper="openMinesweeper" />
+    <div ref="startMenu">
+      <button
+        class="start-button"
+        :class="{ 'start-button--active': menuOpen }"
+        type="button"
+        aria-label="Start"
+        :aria-expanded="menuOpen"
+        @click="menuOpen = !menuOpen"
+      >
+        <img :src="start" alt="" /> <span>Start</span>
+      </button>
+      <StartMenu v-if="menuOpen" @open-minesweeper="openMinesweeper" />
+    </div>
     <div class="taskbar__items">
       <button
         v-for="window in store.windows"
@@ -118,7 +138,7 @@ onUnmounted(() => document.removeEventListener('pointerdown', closeLanguageMenu)
       </div>
     </div>
     <div class="tray">
-      <span class="clock">{{ time }}</span>
+      <span class="clock"> <image :src="soundIcon" alt=""/>{{ time }}</span>
     </div>
   </footer>
 </template>
@@ -152,9 +172,19 @@ onUnmounted(() => document.removeEventListener('pointerdown', closeLanguageMenu)
 
 .start-button {
   min-width: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.start-button img {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
 }
 
 .start-button:active,
+.start-button--active,
 .taskbar__item--active {
   border-color: #404040 #fff #fff #404040;
 }

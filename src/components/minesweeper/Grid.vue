@@ -182,5 +182,6 @@ img {
 .minesweeper-grid {
     display: grid;
     width: fit-content;
+    
 }
 </style>

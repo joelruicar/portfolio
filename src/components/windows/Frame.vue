@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{
-  title: string
-  icon: string
-  zIndex: number
-  position: { x: number; y: number }
-  compact?: boolean
-}>()
+import { computed, onUnmounted, ref } from 'vue'
 
 const emit = defineEmits<{
   close: []
@@ -19,6 +11,32 @@ const emit = defineEmits<{
 const titlebar = ref<HTMLElement | null>(null)
 const dragging = ref(false)
 const dragOffset = ref({ x: 0, y: 0 })
+const maximized = ref(false)
+const size = ref<{ width: number; height: number } | null>(null)
+const resizing = ref(false)
+const resizeDirection = ref('')
+const resizeStart = ref({ x: 0, y: 0, width: 0, height: 0, left: 0, top: 0 })
+
+const props = defineProps<{
+  title: string
+  icon: string
+  zIndex: number
+  position: { x: number; y: number }
+  compact?: boolean
+}>()
+
+const windowStyle = computed(() => {
+  if (maximized.value) return { zIndex: props.zIndex }
+
+  return {
+    zIndex: props.zIndex,
+    left: `${props.position.x}px`,
+    top: `${props.position.y}px`,
+    ...(size.value
+      ? { width: `${size.value.width}px`, height: `${size.value.height}px` }
+      : {}),
+  }
+})
 
 function startDrag(event: PointerEvent) {
   if (event.button !== 0 || !titlebar.value) return
@@ -64,13 +82,81 @@ function endDrag(event: PointerEvent) {
     titlebar.value.releasePointerCapture(event.pointerId)
   }
 }
+
+function toggleMaximize() {
+  maximized.value = !maximized.value
+  resizing.value = false
+  emit('focus')
+}
+
+function startResize(event: PointerEvent, direction: string) {
+  if (event.button !== 0 || maximized.value) return
+
+  const frame = (event.currentTarget as HTMLElement).closest('.window') as HTMLElement | null
+  if (!frame) return
+
+  const rect = frame.getBoundingClientRect()
+  resizeDirection.value = direction
+  resizeStart.value = {
+    x: event.clientX,
+    y: event.clientY,
+    width: rect.width,
+    height: rect.height,
+    left: rect.left,
+    top: rect.top,
+  }
+  resizing.value = true
+  emit('focus')
+  window.addEventListener('pointermove', resize)
+  window.addEventListener('pointerup', endResize, { once: true })
+}
+
+function resize(event: PointerEvent) {
+  if (!resizing.value) return
+
+  const start = resizeStart.value
+  const direction = resizeDirection.value
+  const minWidth = props.compact ? 180 : 260
+  const minHeight = props.compact ? 160 : 180
+  let width = start.width
+  let height = start.height
+  let left = props.position.x
+  let top = props.position.y
+
+  if (direction.includes('e')) width = Math.max(minWidth, start.width + event.clientX - start.x)
+  if (direction.includes('s')) height = Math.max(minHeight, start.height + event.clientY - start.y)
+  if (direction.includes('w')) {
+    width = Math.max(minWidth, start.width - event.clientX + start.x)
+    left = props.position.x + start.width - width
+  }
+  if (direction.includes('n')) {
+    height = Math.max(minHeight, start.height - event.clientY + start.y)
+    top = props.position.y + start.height - height
+  }
+
+  size.value = { width, height }
+  if (direction.includes('w') || direction.includes('n')) {
+    emit('move', { x: Math.max(0, left), y: Math.max(0, top) })
+  }
+}
+
+function endResize() {
+  resizing.value = false
+  resizeDirection.value = ''
+  window.removeEventListener('pointermove', resize)
+}
+
+onUnmounted(() => {
+  window.removeEventListener('pointermove', resize)
+  window.removeEventListener('pointerup', endResize)
+})
 </script>
 
 <template>
   <article
     class="window"
-    :class="{ 'window--dragging': dragging, 'window--compact': compact }"
-    :style="{ zIndex, left: `${position.x}px`, top: `${position.y}px` }"
+    :class="{ 'window--dragging': dragging, 'window--resizing': resizing, 'window--maximized': maximized, 'window--compact': compact }"
+    :style="windowStyle"
     @pointerdown="emit('focus')"
   >
     <header
@@ -88,12 +174,24 @@ function endDrag(event: PointerEvent) {
       </div>
       <div class="window__controls">
         <button type="button" aria-label="Minimize" @click.stop="emit('minimize')">_</button>
+        <button
+          type="button"
+          :aria-label="maximized ? 'Restore' : 'Maximize'"
+          @click.stop="toggleMaximize"
+        >{{ maximized ? '❐' : '□' }}</button>
         <button type="button" aria-label="Close" @click.stop="emit('close')">×</button>
       </div>
     </header>
     <div class="window__body">
       <slot />
     </div>
+    <span
+      v-for="direction in ['n', 'e', 's', 'w', 'ne', 'se', 'sw', 'nw']"
+      :key="direction"
+      class="window__resize-handle"
+      :class="`window__resize-handle--${direction}`"
+      @pointerdown.stop="startResize($event, direction)"
+    />
   </article>
 </template>
 
@@ -112,6 +210,16 @@ function endDrag(event: PointerEvent) {
 
 .window--dragging {
   cursor: grabbing;
+}
+
+.window--resizing {
+  user-select: none;
+}
+
+.window--maximized {
+  inset: 0 0 35px;
+  width: auto !important;
+  height: auto !important;
 }
 
 .window--compact {
@@ -167,6 +275,77 @@ function endDrag(event: PointerEvent) {
   font: inherit;
   font-weight: bold;
   line-height: 16px;
+}
+
+.window__resize-handle {
+  position: absolute;
+  z-index: 2;
+}
+
+.window__resize-handle--n,
+.window__resize-handle--s {
+  right: 5px;
+  left: 5px;
+  height: 5px;
+  cursor: ns-resize;
+}
+
+.window__resize-handle--n {
+  top: -3px;
+}
+
+.window__resize-handle--s {
+  bottom: -3px;
+}
+
+.window__resize-handle--e,
+.window__resize-handle--w {
+  top: 5px;
+  bottom: 5px;
+  width: 5px;
+  cursor: ew-resize;
+}
+
+.window__resize-handle--e {
+  right: -3px;
+}
+
+.window__resize-handle--w {
+  left: -3px;
+}
+
+.window__resize-handle--ne,
+.window__resize-handle--sw {
+  width: 8px;
+  height: 8px;
+  cursor: nesw-resize;
+}
+
+.window__resize-handle--ne {
+  top: -3px;
+  right: -3px;
+}
+
+.window__resize-handle--sw {
+  bottom: -3px;
+  left: -3px;
+}
+
+.window__resize-handle--nw,
+.window__resize-handle--se {
+  width: 8px;
+  height: 8px;
+  cursor: nwse-resize;
+}
+
+.window__resize-handle--nw {
+  top: -3px;
+  left: -3px;
+}
+
+.window__resize-handle--se {
+  right: -3px;
+  bottom: -3px;
 }
 
 .window__body {
