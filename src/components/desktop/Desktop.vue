@@ -1,15 +1,29 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, type Component } from 'vue'
 
 import Taskbar from '../Taskbar.vue'
 import DesktopIcon from './DesktopIcon.vue'
+import WindowFrame from '../windows/Frame.vue'
+import About from '../windows/About.vue'
+import Contact from '../windows/Contact.vue'
+import Projects from '../windows/Projects.vue'
+import Minesweeper from '../windows/Minesweeper.vue'
 import wordpadIcon from '../../assets/wordpad.ico'
 import contactIcon from '../../assets/contact.ico'
 import paint from '../../assets/paint.ico'
 import { useI18n } from '../../i18n'
+import { useWindowsStore, type OsWindow } from '../../stores/windows'
 
 const desktop = ref<HTMLElement | null>(null)
 const { messages } = useI18n()
+const windows = useWindowsStore()
+
+const windowComponents: Record<OsWindow['folder'], Component> = {
+  about: About,
+  contact: Contact,
+  projects: Projects,
+  minesweeper: Minesweeper,
+}
 
 const icons = ref([
   { id: 'about', icon: wordpadIcon, x: 24, y: 24 },
@@ -80,6 +94,15 @@ function selectIcon(id: string) {
   selectedIcons.value = [id]
 }
 
+function openIcon(icon: (typeof icons.value)[number]) {
+  windows.open({
+    id: icon.id,
+    title: messages.value[icon.id as 'about' | 'contact' | 'projects'],
+    icon: icon.icon,
+    folder: icon.id as 'about' | 'contact' | 'projects'
+  })
+}
+
 function isIconSelected(icon: { x: number; y: number }) {
   const iconWidth = 100
   const iconHeight = 80
@@ -142,8 +165,25 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
       :selected="selectedIcons.includes(icon.id)"
       @select="selectIcon(icon.id)"
       @move="moveIcon(icon.id, $event)"
+      @open="openIcon(icon)"
     />
     <div v-if="selecting" class="selection" :style="selectionStyle" />
+    <WindowFrame
+      v-for="window in windows.windows"
+      v-show="!window.minimized"
+      :key="window.id"
+      :title="messages[window.folder]"
+      :icon="window.icon"
+      :z-index="10000 + window.zIndex"
+      :position="window.position"
+      :compact="window.folder === 'minesweeper'"
+      @close="windows.close(window.id)"
+      @minimize="windows.minimize(window.id)"
+      @focus="windows.focus(window.id)"
+      @move="windows.move(window.id, $event)"
+    >
+      <component :is="windowComponents[window.folder]" />
+    </WindowFrame>
   </section>
   <Taskbar />
 </template>

@@ -11,6 +11,7 @@ defineProps<{
 
 const emit = defineEmits<{
   select: []
+  open: []
   move: [delta: { x: number; y: number }]
 }>()
 
@@ -53,6 +54,7 @@ function onPointerUp(event: PointerEvent) {
     @pointermove="onPointerMove"
     @pointerup="onPointerUp"
     @pointercancel="onPointerUp"
+    @dblclick.stop="emit('open')"
   >
     <img v-if="icon.endsWith('.ico')" class="icon" :src="icon" alt="" />
     <span v-else class="icon" aria-hidden="true">{{ icon }}</span>

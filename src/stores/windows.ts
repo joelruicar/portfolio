@@ -6,9 +6,10 @@ export interface OsWindow {
   id: string
   title: string
   icon: string
-  component: string 
+  folder: 'about' | 'contact' | 'projects' | 'minesweeper'
   minimized: boolean
   zIndex: number
+  position: { x: number; y: number }
 }
 
 export const useWindowsStore = defineStore('windows', () => {
@@ -16,10 +17,16 @@ export const useWindowsStore = defineStore('windows', () => {
   const activeId = ref<string | null>(null)
   let topZ = 1
 
-  function open(win: Omit<OsWindow, 'minimized' | 'zIndex'>) {
+  function open(win: Omit<OsWindow, 'minimized' | 'zIndex' | 'position'>) {
     const existing = windows.value.find(w => w.id === win.id)
     if (existing) return focus(existing.id)
-    windows.value.push({ ...win, minimized: false, zIndex: ++topZ })
+    const offset = windows.value.length * 24
+    windows.value.push({
+      ...win,
+      minimized: false,
+      zIndex: ++topZ,
+      position: { x: 160 + offset, y: 80 + offset },
+    })
     activeId.value = win.id
   }
 
@@ -37,10 +44,15 @@ export const useWindowsStore = defineStore('windows', () => {
     if (activeId.value === id) activeId.value = null
   }
 
+  function move(id: string, position: { x: number; y: number }) {
+    const window = windows.value.find(w => w.id === id)
+    if (window) window.position = position
+  }
+
   function close(id: string) {
     windows.value = windows.value.filter(w => w.id !== id)
     if (activeId.value === id) activeId.value = null
   }
 
-  return { windows, activeId, open, focus, minimize, close }
+  return { windows, activeId, open, focus, minimize, move, close }
 })

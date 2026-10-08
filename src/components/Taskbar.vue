@@ -1,17 +1,13 @@
-<!-- Taskbar.vue -->
 <script setup lang="ts">
-// import { useWindowsStore } from '@/stores/windows'
-// import StartButton from './StartButton.vue'
-// import StartMenu from './StartMenu.vue'
-// import TaskbarItem from './TaskbarItem.vue'
-
-// const store = useWindowsStore()
-// const menuOpen = ref(false)
-
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n, type Locale } from '../i18n'
+import { useWindowsStore } from '../stores/windows'
+import StartMenu from './StartMenu.vue'
+import minesweeperIcon from '../assets/minesweeper/img/Icon.png'
 
+const store = useWindowsStore()
 const time = ref('')
+const menuOpen = ref(false)
 const { locale, messages, setLocale, locales } = useI18n()
 const languageOpen = ref(false)
 const languageMenu = ref<HTMLElement | null>(null)
@@ -35,9 +31,31 @@ function toggleLanguageMenu() {
   languageOpen.value = !languageOpen.value
 }
 
+function openMinesweeper() {
+  store.open({
+    id: 'minesweeper',
+    title: 'Minesweeper',
+    icon: minesweeperIcon,
+    folder: 'minesweeper',
+  })
+  menuOpen.value = false
+}
+
 function selectLanguage(nextLocale: Locale) {
   setLocale(nextLocale)
   languageOpen.value = false
+}
+
+function toggleWindow(id: string) {
+  const selectedWindow = store.windows.find((window) => window.id === id)
+  if (!selectedWindow) return
+
+  if (store.activeId === id && !selectedWindow.minimized) {
+    store.minimize(id)
+    return
+  }
+
+  store.focus(id)
 }
 
 function closeLanguageMenu(event: PointerEvent) {
@@ -52,18 +70,28 @@ onUnmounted(() => document.removeEventListener('pointerdown', closeLanguageMenu)
 
 <template>
   <footer class="taskbar">
-    <!-- <StartMenu v-if="menuOpen" @close="menuOpen = false" />
-    <StartButton :pressed="menuOpen" @click="menuOpen = !menuOpen" />
-
+    <button
+      class="start-button"
+      type="button"
+      aria-label="Start"
+      :aria-expanded="menuOpen"
+      @click="menuOpen = !menuOpen"
+    >w</button>
+    <StartMenu v-if="menuOpen" @open-minesweeper="openMinesweeper" />
     <div class="taskbar__items">
-      <TaskbarItem
-        v-for="w in store.windows"
-        :key="w.id"
-        :window="w"
-        :active="store.activeId === w.id"
-        @click="store.activeId === w.id ? store.minimize(w.id) : store.focus(w.id)"
-      />
-    </div>  -->
+      <button
+        v-for="window in store.windows"
+        :key="window.id"
+        class="taskbar__item"
+        :class="{ 'taskbar__item--active': store.activeId === window.id && !window.minimized }"
+        type="button"
+        :aria-pressed="store.activeId === window.id && !window.minimized"
+        @click="toggleWindow(window.id)"
+      >
+        <img v-if="window.icon.endsWith('.ico')" :src="window.icon" alt="" />
+        <span>{{ messages[window.folder] }}</span>
+      </button>
+    </div>
     <div ref="languageMenu" class="language">
       <span class="sr-only">{{ messages.language }}</span>
       <button
@@ -109,6 +137,50 @@ onUnmounted(() => document.removeEventListener('pointerdown', closeLanguageMenu)
   z-index: 9999; 
 }
 .taskbar__items { display: flex; gap: 2px; flex: 1; }
+
+.start-button,
+.taskbar__item {
+  height: 29px;
+  color: #000;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #fff #404040 #404040 #fff;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.start-button {
+  min-width: 42px;
+}
+
+.start-button:active,
+.taskbar__item--active {
+  border-color: #404040 #fff #fff #404040;
+}
+
+.taskbar__item {
+  display: flex;
+  min-width: 120px;
+  max-width: 220px;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.taskbar__item img {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.taskbar__item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .tray {
   display: flex;
