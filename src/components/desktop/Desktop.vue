@@ -10,7 +10,8 @@ import Projects from '../windows/Projects.vue'
 import Minesweeper from '../windows/Minesweeper.vue'
 import wordpadIcon from '../../assets/wordpad.ico'
 import contactIcon from '../../assets/contact.ico'
-import paint from '../../assets/paint.ico'
+import directoryIcon from '../../assets/directory.ico'
+import paintIcon from '../../assets/paint.ico'
 import { useI18n } from '../../i18n'
 import { useWindowsStore, type OsWindow } from '../../stores/windows'
 
@@ -27,14 +28,15 @@ const windowComponents: Record<OsWindow['folder'], Component> = {
 
 const icons = ref([
   { id: 'about', icon: wordpadIcon, x: 24, y: 24 },
-  { id: 'contact', icon: contactIcon, x: 24, y: 108 },
-  { id: 'projects', icon: paint, x: 24, y: 192 },
+  { id: 'projects', icon: directoryIcon, x: 24, y: 108 },
+  { id: 'skills', icon: paintIcon, x: 24, y: 192 },
+  { id: 'contact', icon: contactIcon, x: 24, y: 276 },
 ])
 
 const translatedIcons = computed(() =>
   icons.value.map((icon) => ({
     ...icon,
-    label: messages.value[icon.id as 'about' | 'contact' | 'projects'],
+    label: messages.value[icon.id as 'about' | 'contact' | 'projects' | 'skills'],
   })),
 )
 
@@ -42,6 +44,8 @@ const selectedIcons = ref<string[]>([])
 const selecting = ref(false)
 const start = ref({ x: 0, y: 0 })
 const current = ref({ x: 0, y: 0 })
+const iconWidth = 100
+const iconHeight = 80
 
 const selectionStyle = computed(() => {
   const x = Math.min(start.value.x, current.value.x)
@@ -97,15 +101,13 @@ function selectIcon(id: string) {
 function openIcon(icon: (typeof icons.value)[number]) {
   windows.open({
     id: icon.id,
-    title: messages.value[icon.id as 'about' | 'contact' | 'projects'],
+    title: messages.value[icon.id as 'about' | 'contact' | 'projects' | 'skills'],
     icon: icon.icon,
-    folder: icon.id as 'about' | 'contact' | 'projects'
+    folder: icon.id as 'about' | 'contact' | 'projects' 
   })
 }
 
 function isIconSelected(icon: { x: number; y: number }) {
-  const iconWidth = 100
-  const iconHeight = 80
   const bounds = selectionBounds.value
 
   return (
@@ -116,16 +118,40 @@ function isIconSelected(icon: { x: number; y: number }) {
   )
 }
 
+function iconsOverlap(
+  first: { x: number; y: number },
+  second: { x: number; y: number },
+  delta: { x: number; y: number },
+) {
+  return (
+    first.x + delta.x < second.x + iconWidth &&
+    first.x + delta.x + iconWidth > second.x &&
+    first.y + delta.y < second.y + iconHeight &&
+    first.y + delta.y + iconHeight > second.y
+  )
+}
+
+function collidesWithStationaryIcon(
+  movingIcons: (typeof icons.value)[number][],
+  stationaryIcons: (typeof icons.value)[number][],
+  delta: { x: number; y: number },
+) {
+  return movingIcons.some((movingIcon) =>
+    stationaryIcons.some((stationaryIcon) =>
+      iconsOverlap(movingIcon, stationaryIcon, delta),
+    ),
+  )
+}
+
 function moveIcon(id: string, delta: { x: number; y: number }) {
   if (!desktop.value) return
 
-  const iconWidth = 76
-  const iconHeight = 68
   const maxX = Math.max(0, desktop.value.clientWidth - iconWidth)
   const maxY = Math.max(0, desktop.value.clientHeight - iconHeight)
 
   const idsToMove = selectedIcons.value.includes(id) ? selectedIcons.value : [id]
   const iconsToMove = icons.value.filter((icon) => idsToMove.includes(icon.id))
+  const stationaryIcons = icons.value.filter((icon) => !idsToMove.includes(icon.id))
   if (iconsToMove.length === 0) return
 
   const minDelta = {
@@ -137,9 +163,34 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
     y: Math.min(...iconsToMove.map((icon) => maxY - icon.y)),
   }
 
-  const clampedDelta = {
+  const boundedDelta = {
     x: Math.min(maxDelta.x, Math.max(minDelta.x, delta.x)),
     y: Math.min(maxDelta.y, Math.max(minDelta.y, delta.y)),
+  }
+
+  let clampedDelta = boundedDelta
+  if (collidesWithStationaryIcon(iconsToMove, stationaryIcons, boundedDelta)) {
+    let safe = 0
+    let blocked = 1
+
+    for (let attempt = 0; attempt < 20; attempt += 1) {
+      const midpoint = (safe + blocked) / 2
+      const candidate = {
+        x: boundedDelta.x * midpoint,
+        y: boundedDelta.y * midpoint,
+      }
+
+      if (collidesWithStationaryIcon(iconsToMove, stationaryIcons, candidate)) {
+        blocked = midpoint
+      } else {
+        safe = midpoint
+      }
+    }
+
+    clampedDelta = {
+      x: boundedDelta.x * safe,
+      y: boundedDelta.y * safe,
+    }
   }
 
   iconsToMove.forEach((icon) => {

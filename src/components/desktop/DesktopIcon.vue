@@ -16,17 +16,24 @@ const emit = defineEmits<{
 }>()
 
 const dragging = ref(false)
+const moved = ref(false)
 const pointer = ref({ x: 0, y: 0 })
 
 function onPointerDown(event: PointerEvent) {
+  event.preventDefault()
   emit('select')
   dragging.value = true
+  moved.value = false
   pointer.value = { x: event.clientX, y: event.clientY }
   ;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId)
 }
 
 function onPointerMove(event: PointerEvent) {
   if (!dragging.value) return
+
+  if (Math.hypot(event.clientX - pointer.value.x, event.clientY - pointer.value.y) > 3) {
+    moved.value = true
+  }
 
   emit('move', {
     x: event.clientX - pointer.value.x,
@@ -41,6 +48,10 @@ function onPointerUp(event: PointerEvent) {
   if (target.hasPointerCapture(event.pointerId)) {
     target.releasePointerCapture(event.pointerId)
   }
+
+  if (event.pointerType === 'touch' && !moved.value) {
+    emit('open')
+  }
 }
 </script>
 
@@ -54,9 +65,16 @@ function onPointerUp(event: PointerEvent) {
     @pointermove="onPointerMove"
     @pointerup="onPointerUp"
     @pointercancel="onPointerUp"
+    @dragstart.prevent
     @dblclick.stop="emit('open')"
   >
-    <img v-if="icon.endsWith('.ico')" class="icon" :src="icon" alt="" />
+    <img
+      v-if="icon.endsWith('.ico')"
+      class="icon"
+      :src="icon"
+      alt=""
+      draggable="false"
+    />
     <span v-else class="icon" aria-hidden="true">{{ icon }}</span>
     <span class="label">{{ label }}</span>
   </button>
@@ -75,7 +93,7 @@ function onPointerUp(event: PointerEvent) {
   color: #fff;
   background: transparent;
   font: inherit;
-  cursor: default;
+  cursor: pointer;
   touch-action: none;
 }
 
@@ -92,6 +110,7 @@ function onPointerUp(event: PointerEvent) {
   font-size: 32px;
   line-height: 32px;
   object-fit: contain;
+  pointer-events: none;
 }
 
 .label {

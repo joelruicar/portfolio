@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 
 const emit = defineEmits<{
   close: []
@@ -9,6 +9,7 @@ const emit = defineEmits<{
 }>()
 
 const titlebar = ref<HTMLElement | null>(null)
+const frameElement = ref<HTMLElement | null>(null)
 const dragging = ref(false)
 const dragOffset = ref({ x: 0, y: 0 })
 const maximized = ref(false)
@@ -24,6 +25,21 @@ const props = defineProps<{
   position: { x: number; y: number }
   compact?: boolean
 }>()
+
+onMounted(() => {
+  if (!window.matchMedia('(max-width: 699px)').matches) return
+
+  nextTick(() => {
+    const frame = frameElement.value
+    const desktop = frame?.parentElement
+    if (!frame || !desktop) return
+
+    emit('move', {
+      x: Math.max(0, (desktop.clientWidth - frame.offsetWidth) / 2),
+      y: Math.max(0, (desktop.clientHeight - 35 - frame.offsetHeight) / 2),
+    })
+  })
+})
 
 const windowStyle = computed(() => {
   if (maximized.value) return { zIndex: props.zIndex }
@@ -154,6 +170,7 @@ onUnmounted(() => {
 
 <template>
   <article
+    ref="frameElement"
     class="window"
     :class="{ 'window--dragging': dragging, 'window--resizing': resizing, 'window--maximized': maximized, 'window--compact': compact }"
     :style="windowStyle"
@@ -199,6 +216,7 @@ onUnmounted(() => {
 .window {
   position: absolute;
   display: flex;
+  box-sizing: border-box;
   width: min(620px, 75vw);
   min-height: 260px;
   flex-direction: column;
@@ -358,5 +376,20 @@ onUnmounted(() => {
 .window--compact .window__body {
   padding: 0;
   background: #c3c3c3;
+}
+
+@media (max-width: 699px) {
+  .window {
+    width: min(92vw, 430px);
+    height: min(68dvh, 520px);
+    min-height: 300px;
+    max-height: calc(100dvh - 55px);
+  }
+
+  .window--compact {
+    width: min(92vw, 370px);
+    height: min(72dvh, 480px);
+    min-height: 300px;
+  }
 }
 </style>

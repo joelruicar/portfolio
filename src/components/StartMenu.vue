@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import minesweeperIcon from '../assets/minesweeper/img/Icon.png'
 import explorerIcon from '../assets/explorer.ico'
-import wordpadIcon from '../assets/wordpad.ico'
-import paintIcon from '../assets/paint.ico'
+import linkedIcon from '../assets/linked.ico'
+import gitIcon from '../assets/git.ico'
 import promptIcon from '../assets/prompt.ico'
 import { useI18n } from '../i18n'
 
@@ -14,8 +14,8 @@ const { messages } = useI18n()
 
 const menuItems = [
   { key: 'programs', icon: explorerIcon },
-  { key: 'documents', icon: wordpadIcon },
-  { key: 'settings', icon: paintIcon },
+  { key: 'documents', icon: linkedIcon },
+  { key: 'settings', icon: gitIcon },
   { key: 'run', icon: promptIcon },
 ] as const
 </script>

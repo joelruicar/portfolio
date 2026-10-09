@@ -85,7 +85,7 @@ onUnmounted(() => {
 
 <template>
   <footer class="taskbar">
-    <div ref="startMenu">
+    <div ref="startMenu" class="start-area">
       <button
         class="start-button"
         :class="{ 'start-button--active': menuOpen }"
@@ -94,7 +94,7 @@ onUnmounted(() => {
         :aria-expanded="menuOpen"
         @click="menuOpen = !menuOpen"
       >
-        <img :src="start" alt="" /> <span>Start</span>
+        <img :src="start" alt="" /> <span>{{ messages.socials }}</span>
       </button>
       <StartMenu v-if="menuOpen" @open-minesweeper="openMinesweeper" />
     </div>
@@ -187,6 +187,7 @@ onUnmounted(() => {
 .start-button--active,
 .taskbar__item--active {
   border-color: #404040 #fff #fff #404040;
+  background: #C0C0C0;
 }
 
 .taskbar__item {
@@ -295,9 +296,49 @@ onUnmounted(() => {
 }
 
 @media screen and (max-width: 699px) {
+  .taskbar {
+    gap: 2px;
+  }
+
+  .start-area {
+    flex: 0 0 auto;
+  }
+
+  .taskbar__items {
+    min-width: 0;
+    gap: 1px;
+  }
+
+  .start-button,
+  .taskbar__item {
+    height: 27px;
+  }
+
+  .start-button {
+    min-width: 0;
+    padding: 2px 4px;
+  }
+
+  .taskbar__item {
+    min-width: 0;
+    flex: 1 1 0;
+    justify-content: center;
+    padding: 2px 3px;
+  }
+
+  .taskbar__item img {
+    width: 14px;
+    height: 14px;
+  }
+
+  .taskbar__item span {
+    min-width: 0;
+    font-size: 11px;
+  }
+
   .language__button {
-    min-width: 48px;
-    padding-right: 20px;
+    min-width: 0;
+    padding: 2px 16px 2px 4px;
     font-size: 12px;
   }
 
@@ -311,12 +352,37 @@ onUnmounted(() => {
   }
 
   .tray {
-    min-width: 48px;
+    min-width: 0;
     padding: 0 4px;
   }
 
   .clock {
     font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .start-button span,
+  .taskbar__item span {
+    display: none;
+  }
+
+  .start-button {
+    width: 30px;
+    justify-content: center;
+  }
+
+  .taskbar__item {
+    min-width: 24px;
+  }
+
+  .language__button {
+    width: 34px;
+    padding: 2px 14px 2px 3px;
+  }
+
+  .tray {
+    padding: 0 2px;
   }
 }
 </style>

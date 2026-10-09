@@ -7,6 +7,7 @@ type Translation = {
   about: string
   contact: string
   projects: string
+  skills: string
   minesweeper: string
   language: string
   languageNames: Record<Locale, string>
@@ -24,13 +25,15 @@ type Translation = {
   file: string
   edit: string
   view: string
+  socials: string
 }
 
 const translations: Record<Locale, Translation> = {
   es: {
     about: 'Sobre mí',
-    contact: 'Contacto',
+    contact: 'CV',
     projects: 'Proyectos',
+    skills: 'Habilidades',
     minesweeper: 'Buscaminas',
     language: 'Idioma',
     languageNames: { es: 'ES', en: 'EN', de: 'DE' },
@@ -47,12 +50,14 @@ const translations: Record<Locale, Translation> = {
       about: 'Aquí puedes contar quién eres y cuál es tu experiencia.',
       contact: 'Aquí puedes añadir tus datos de contacto y tus redes.',
       projects: 'Aquí puedes mostrar tus proyectos y trabajos destacados.',
-    }
+    },
+    socials: 'Redes sociales'
   },
   en: {
     about: 'About me',
-    contact: 'Contact',
+    contact: 'CV',
     projects: 'Projects',
+    skills: 'Skills',
     minesweeper: 'Minesweeper',
     language: 'Language',
     languageNames: { es: 'ES', en: 'EN', de: 'DE' },
@@ -70,11 +75,13 @@ const translations: Record<Locale, Translation> = {
       contact: 'Here you can add your contact details and social profiles.',
       projects: 'Here you can showcase your projects and featured work.',
     },
+    socials:'Socials'
   },
   de: {
     about: 'Über mich',
-    contact: 'Kontakt',
+    contact: 'CV',
     projects: 'Projekte',
+    skills: 'Fähigkeiten',
     minesweeper: 'Minesweeper',
     language: 'Sprache',
     languageNames: { es: 'ES', en: 'EN', de: 'DE' },
@@ -92,6 +99,7 @@ const translations: Record<Locale, Translation> = {
       contact: 'Hier kannst du deine Kontaktdaten und sozialen Profile hinzufügen.',
       projects: 'Hier kannst du deine Projekte und herausragenden Arbeiten zeigen.',
     },
+    socials: 'Social Media'
   },
 }
 
