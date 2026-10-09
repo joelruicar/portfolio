@@ -11,11 +11,12 @@ type Translation = {
   minesweeper: string
   language: string
   languageNames: Record<Locale, string>
+  run:string
   startMenu: {
     mines: string
     run: string
-    documents: string
-    settings: string
+    linked: string
+    git: string
   }
   content: {
     about: string
@@ -35,13 +36,14 @@ const translations: Record<Locale, Translation> = {
     projects: 'Proyectos',
     skills: 'Habilidades',
     minesweeper: 'Buscaminas',
+    run: 'CMD',
     language: 'Idioma',
     languageNames: { es: 'ES', en: 'EN', de: 'DE' },
     startMenu: {
       mines: 'Buscaminas',
       run: 'CMD',
-      documents: 'LinkedIn',
-      settings: 'Github',
+      linked: 'LinkedIn',
+      git: 'Github',
     },
     file: 'Fichero',
     edit: 'Editar',
@@ -57,6 +59,7 @@ const translations: Record<Locale, Translation> = {
     about: 'About me',
     contact: 'CV',
     projects: 'Projects',
+    run: 'CMD',
     skills: 'Skills',
     minesweeper: 'Minesweeper',
     language: 'Language',
@@ -64,8 +67,8 @@ const translations: Record<Locale, Translation> = {
     startMenu: {
       mines: 'Minesweeper',
       run: 'CMD',
-      documents: 'LinkedIn',
-      settings: 'Github',
+      linked: 'LinkedIn',
+      git: 'Github',
     },
     file: 'File',
     edit: 'Edit',
@@ -81,6 +84,7 @@ const translations: Record<Locale, Translation> = {
     about: 'Über mich',
     contact: 'CV',
     projects: 'Projekte',
+    run: 'CMD',
     skills: 'Fähigkeiten',
     minesweeper: 'Minesweeper',
     language: 'Sprache',
@@ -88,8 +92,8 @@ const translations: Record<Locale, Translation> = {
     startMenu: {
       mines: 'Minesweeper',
       run: 'CMD',
-      documents: 'LinkedInd',
-      settings: 'Github',
+      linked: 'LinkedInd',
+      git: 'Github',
     },
     file: 'Datei',
     edit: 'Bearbeiten',

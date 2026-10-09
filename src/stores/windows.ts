@@ -6,7 +6,7 @@ export interface OsWindow {
   id: string
   title: string
   icon: string
-  folder: 'about' | 'contact' | 'projects' | 'minesweeper'
+  folder: 'about' | 'contact' | 'projects' | 'minesweeper' | 'run'
   minimized: boolean
   zIndex: number
   position: { x: number; y: number }

@@ -8,6 +8,7 @@ import About from '../windows/About.vue'
 import Contact from '../windows/Contact.vue'
 import Projects from '../windows/Projects.vue'
 import Minesweeper from '../windows/Minesweeper.vue'
+import CMD from '../windows/CMD.vue'
 import wordpadIcon from '../../assets/wordpad.ico'
 import contactIcon from '../../assets/contact.ico'
 import directoryIcon from '../../assets/directory.ico'
@@ -24,6 +25,7 @@ const windowComponents: Record<OsWindow['folder'], Component> = {
   contact: Contact,
   projects: Projects,
   minesweeper: Minesweeper,
+  run: CMD
 }
 
 const icons = ref([
@@ -233,7 +235,10 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
       @focus="windows.focus(window.id)"
       @move="windows.move(window.id, $event)"
     >
-      <component :is="windowComponents[window.folder]" />
+      <component
+        :is="windowComponents[window.folder]"
+        @close="windows.close(window.id)"
+      />
     </WindowFrame>
   </section>
   <Taskbar />
@@ -243,7 +248,6 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
 .desktop {
   width: 100%;
   position: relative;
-  min-height: 100vh;
   user-select: none; 
   min-width: 100dvw;
   height: 100dvh;

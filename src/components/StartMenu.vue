@@ -7,17 +7,25 @@ import promptIcon from '../assets/prompt.ico'
 import { useI18n } from '../i18n'
 
 const emit = defineEmits<{
-  openMinesweeper: []
+  'open-minesweeper': []
+  'open-cmd': []
 }>()
 
 const { messages } = useI18n()
 
 const menuItems = [
-  { key: 'programs', icon: explorerIcon },
-  { key: 'documents', icon: linkedIcon },
-  { key: 'settings', icon: gitIcon },
-  { key: 'run', icon: promptIcon },
+  { key: 'programs', icon: explorerIcon, href: undefined },
+  { key: 'linked', icon: linkedIcon, href: 'https://www.linkedin.com/in/joel-ruiz-bbab68240' },
+  { key: 'git', icon: gitIcon, href: 'https://github.com/joelruicar' },
+  { key: 'run', icon: promptIcon, href: undefined },
 ] as const
+
+type MenuItemKey = (typeof menuItems)[number]['key']
+
+function handleItemClick(key: MenuItemKey) {
+  if (key === 'programs') emit('open-minesweeper')
+  if (key === 'run') emit('open-cmd')
+}
 </script>
 
 <template>
@@ -27,17 +35,21 @@ const menuItems = [
       <strong>95</strong>
     </div>
     <div class="start-menu__items">
-      <button
+      <component
         v-for="item in menuItems"
         :key="item.key"
+        :is="item.href ? 'a' : 'button'"
         class="start-menu__item"
-        type="button"
         role="menuitem"
-        @click="item.key === 'programs' && emit('openMinesweeper')"
+        :href="item.href"
+        :target="item.href ? '_blank' : undefined"
+        :rel="item.href ? 'noopener noreferrer' : undefined"
+        :type="item.href ? undefined : 'button'"
+        @click="handleItemClick(item.key)"
       >
         <img :src="item.key === 'programs' ? minesweeperIcon : item.icon" alt="">
         <span>{{ item.key === 'programs' ? messages.minesweeper : messages.startMenu[item.key] }}</span>
-      </button>
+      </component>
     </div>
   </div>
 </template>
@@ -89,6 +101,8 @@ const menuItems = [
 .start-menu__item {
   display: flex;
   width: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
   min-height: 32px;
   align-items: center;
   gap: 8px;
@@ -103,6 +117,7 @@ const menuItems = [
 
 .start-menu__item:hover {
   color: #fff;
+  cursor: pointer;
   background: #000080;
 }
 

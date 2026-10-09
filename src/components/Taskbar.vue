@@ -4,6 +4,7 @@ import { useI18n, type Locale } from '../i18n'
 import { useWindowsStore } from '../stores/windows'
 import StartMenu from './StartMenu.vue'
 import minesweeperIcon from '../assets/minesweeper/img/Icon.png'
+import promptIcon from '../assets/prompt.ico'
 import soundIcon from '../assets/sound.svg'
 import start from '../assets/start.ico'
 const store = useWindowsStore()
@@ -39,6 +40,16 @@ function openMinesweeper() {
     title: 'Minesweeper',
     icon: minesweeperIcon,
     folder: 'minesweeper',
+  })
+  menuOpen.value = false
+}
+
+function openCMD() {
+  store.open({
+    id: 'run',
+    title: 'CMD',
+    icon: promptIcon,
+    folder: 'run',
   })
   menuOpen.value = false
 }
@@ -96,7 +107,7 @@ onUnmounted(() => {
       >
         <img :src="start" alt="" /> <span>{{ messages.socials }}</span>
       </button>
-      <StartMenu v-if="menuOpen" @open-minesweeper="openMinesweeper" />
+      <StartMenu v-if="menuOpen" @open-minesweeper="openMinesweeper" @open-cmd="openCMD" />
     </div>
     <div class="taskbar__items">
       <button

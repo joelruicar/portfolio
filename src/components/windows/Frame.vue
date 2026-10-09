@@ -183,6 +183,7 @@ onUnmounted(() => {
       @pointermove="drag"
       @pointerup="endDrag"
       @pointercancel="endDrag"
+      @open="toggleMaximize"
     >
       <div class="window__title">
         <img v-if="icon.endsWith('.ico') || icon.endsWith('.png')" :src="icon" alt="" />
@@ -224,6 +225,7 @@ onUnmounted(() => {
   border: 2px solid;
   border-color: #fff #404040 #404040 #fff;
   box-shadow: 2px 2px #000;
+  height: 400px; 
 }
 
 .window--dragging {
@@ -368,11 +370,13 @@ onUnmounted(() => {
 
 .window__body {
   flex: 1;
-  padding: 16px;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
   background: #fff;
 }
-
 .window--compact .window__body {
   padding: 0;
   background: #c3c3c3;
