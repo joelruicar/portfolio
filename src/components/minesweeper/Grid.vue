@@ -8,6 +8,7 @@ const props = defineProps({
     row: Number,
 })
 
+let placed = false;
 const emit = defineEmits(['play', 'pause', 'flaged', 'unflaged', 'win', 'lose'])
 
 const col = props.col
@@ -22,10 +23,18 @@ const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
 }
 
-const plantBomb = () => {
-    const colb = getRandomInt(col+1)
-    const rowb = getRandomInt(row+1)
-    grid[colb][rowb] === 'b' ? plantBomb() : grid[colb][rowb] = 'b'
+const plantBombsSafe = (safeX, safeY) => {
+  let planted = 0
+  while (planted < bombs) {
+    const x = getRandomInt(col + 1)
+    const y = getRandomInt(row + 1)
+    const isSafe = Math.abs(x - safeX) <= 1 && Math.abs(y - safeY) <= 1
+    if (isSafe || grid[x][y] === 'b') continue
+    grid[x][y] = 'b'
+    planted++
+  }
+  lookForBombs()
+  placed = true
 }
 
 const spreadBomb = () => {
@@ -65,6 +74,8 @@ const lookForBombs = () => {
 
 const gameRules = (x, y) => {
     emit('play')
+
+  if (!placed) plantBombsSafe(x, y)
     if(game_stop === false){
         if(grid[x][y] === 'b'){
             for (let i = 0; i <= col; i++) {
@@ -147,12 +158,11 @@ const checkIfWon = () => {
 }
 
 const gameInit = () => {
-    game_stop = false
-    bomb_count = bombs
-    sgrid.value = createGridOf('n')
-    grid = createGridOf('0')
-    spreadBomb()
-    lookForBombs()
+  game_stop = false
+  placed = false
+  bomb_count = bombs
+  sgrid.value = createGridOf('n')
+  grid = createGridOf('0')
 }
 
 defineExpose({

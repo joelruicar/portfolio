@@ -11,7 +11,9 @@ defineProps<{
 
 const emit = defineEmits<{
   select: []
+  dragStart: []
   open: []
+  drop: []
   move: [delta: { x: number; y: number }]
 }>()
 
@@ -22,6 +24,7 @@ const pointer = ref({ x: 0, y: 0 })
 function onPointerDown(event: PointerEvent) {
   event.preventDefault()
   emit('select')
+  emit('dragStart')
   dragging.value = true
   moved.value = false
   pointer.value = { x: event.clientX, y: event.clientY }
@@ -52,6 +55,7 @@ function onPointerUp(event: PointerEvent) {
   if (event.pointerType === 'touch' && !moved.value) {
     emit('open')
   }
+  emit('drop')
 }
 </script>
 

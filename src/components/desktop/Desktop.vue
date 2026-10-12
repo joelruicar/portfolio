@@ -43,6 +43,7 @@ const translatedIcons = computed(() =>
 )
 
 const selectedIcons = ref<string[]>([])
+const dragStartPositions = new Map<string, { x: number; y: number }>()
 const selecting = ref(false)
 const start = ref({ x: 0, y: 0 })
 const current = ref({ x: 0, y: 0 })
@@ -100,6 +101,39 @@ function selectIcon(id: string) {
   selectedIcons.value = [id]
 }
 
+function startIconDrag(id: string) {
+  const idsToMove = selectedIcons.value.includes(id) ? selectedIcons.value : [id]
+  dragStartPositions.clear()
+
+  icons.value
+    .filter((icon) => idsToMove.includes(icon.id))
+    .forEach((icon) => {
+      dragStartPositions.set(icon.id, { x: icon.x, y: icon.y })
+    })
+}
+
+function hasOverlappingIcons() {
+  return icons.value.some((icon, index) =>
+    icons.value.slice(index + 1).some((otherIcon) =>
+      iconsOverlap(icon, otherIcon, { x: 0, y: 0 }),
+    ),
+  )
+}
+
+function finishIconDrag() {
+  if (hasOverlappingIcons()) {
+    icons.value.forEach((icon) => {
+      const position = dragStartPositions.get(icon.id)
+      if (position) {
+        icon.x = position.x
+        icon.y = position.y
+      }
+    })
+  }
+
+  dragStartPositions.clear()
+}
+
 function openIcon(icon: (typeof icons.value)[number]) {
   windows.open({
     id: icon.id,
@@ -133,18 +167,6 @@ function iconsOverlap(
   )
 }
 
-function collidesWithStationaryIcon(
-  movingIcons: (typeof icons.value)[number][],
-  stationaryIcons: (typeof icons.value)[number][],
-  delta: { x: number; y: number },
-) {
-  return movingIcons.some((movingIcon) =>
-    stationaryIcons.some((stationaryIcon) =>
-      iconsOverlap(movingIcon, stationaryIcon, delta),
-    ),
-  )
-}
-
 function moveIcon(id: string, delta: { x: number; y: number }) {
   if (!desktop.value) return
 
@@ -153,7 +175,6 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
 
   const idsToMove = selectedIcons.value.includes(id) ? selectedIcons.value : [id]
   const iconsToMove = icons.value.filter((icon) => idsToMove.includes(icon.id))
-  const stationaryIcons = icons.value.filter((icon) => !idsToMove.includes(icon.id))
   if (iconsToMove.length === 0) return
 
   const minDelta = {
@@ -170,34 +191,9 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
     y: Math.min(maxDelta.y, Math.max(minDelta.y, delta.y)),
   }
 
-  let clampedDelta = boundedDelta
-  if (collidesWithStationaryIcon(iconsToMove, stationaryIcons, boundedDelta)) {
-    let safe = 0
-    let blocked = 1
-
-    for (let attempt = 0; attempt < 20; attempt += 1) {
-      const midpoint = (safe + blocked) / 2
-      const candidate = {
-        x: boundedDelta.x * midpoint,
-        y: boundedDelta.y * midpoint,
-      }
-
-      if (collidesWithStationaryIcon(iconsToMove, stationaryIcons, candidate)) {
-        blocked = midpoint
-      } else {
-        safe = midpoint
-      }
-    }
-
-    clampedDelta = {
-      x: boundedDelta.x * safe,
-      y: boundedDelta.y * safe,
-    }
-  }
-
   iconsToMove.forEach((icon) => {
-    icon.x += clampedDelta.x
-    icon.y += clampedDelta.y
+    icon.x += boundedDelta.x
+    icon.y += boundedDelta.y
   })
 }
 </script>
@@ -217,7 +213,9 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
       v-bind="icon"
       :selected="selectedIcons.includes(icon.id)"
       @select="selectIcon(icon.id)"
+      @drag-start="startIconDrag(icon.id)"
       @move="moveIcon(icon.id, $event)"
+      @drop="finishIconDrag"
       @open="openIcon(icon)"
     />
     <div v-if="selecting" class="selection" :style="selectionStyle" />
