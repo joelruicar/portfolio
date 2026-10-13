@@ -241,14 +241,17 @@ onUnmounted(() => {
   position: absolute;
   display: flex;
   box-sizing: border-box;
-  width: min(620px, 75vw);
-  min-height: 260px;
+  width: min(880px, 86vw);
+  height: min(980px, 82vh);
+  min-width: 280px;
+  min-height: 360px;
+  max-width: calc(100vw - 12px);
+  max-height: calc(100vh - 42px);
   flex-direction: column;
   background: #c0c0c0;
   border: 2px solid;
   border-color: #fff #404040 #404040 #fff;
   box-shadow: 2px 2px #000;
-  height: 400px; 
 }
 
 .window--dragging {
@@ -412,15 +415,15 @@ onUnmounted(() => {
 
 @media (max-width: 699px) {
   .window {
-    width: min(92vw, 430px);
-    height: min(68dvh, 520px);
-    min-height: 300px;
-    max-height: calc(100dvh - 55px);
+    width: min(94vw, 480px);
+    height: min(76dvh, 600px);
+    min-height: 320px;
+    max-height: calc(100dvh - 45px);
   }
 
   .window--compact {
-    width: min(92vw, 370px);
-    height: min(72dvh, 480px);
+    width: min(94vw, 380px);
+    height: min(74dvh, 500px);
     min-height: 300px;
   }
 }

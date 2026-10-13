@@ -37,8 +37,8 @@ const icons = ref<Array<{ id: OsWindow['folder']; icon: string; x: number; y: nu
   { id: 'projects', icon: directoryIcon, x: 24, y: 108 },
   { id: 'skills', icon: paintIcon, x: 24, y: 192 },
   { id: 'contact', icon: contactIcon, x: 24, y: 276 },
-  { id: 'minesweeper', icon: minesweeperIcon, x: 24, y: 360 },
-  { id: 'run', icon: promptIcon, x: 24, y: 444 },
+  { id: 'minesweeper', icon: minesweeperIcon, x: 24, y: 444 },
+  { id: 'run', icon: promptIcon, x: 24, y: 528},
 ])
 
 const translatedIcons = computed(() =>

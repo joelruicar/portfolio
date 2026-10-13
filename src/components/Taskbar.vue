@@ -265,7 +265,7 @@ onUnmounted(() => {
 .start-button--active,
 .taskbar__item--active {
   border-color: #404040 #fff #fff #404040;
-  background: #C0C0C0;
+  background: #c0c0c0;
 }
 
 .taskbar__item {

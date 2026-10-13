@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import explorerIcon from '../assets/explorer.ico'
 import linkedIcon from '../assets/linked.ico'
 import gitIcon from '../assets/git.ico'
 import { useI18n } from '../i18n'
@@ -14,7 +13,6 @@ const { messages } = useI18n()
 const menuItems = [
   { key: 'linked', icon: linkedIcon, href: 'https://www.linkedin.com/in/joel-ruiz-bbab68240' },
   { key: 'git', icon: gitIcon, href: 'https://github.com/joelruicar' },
-  { key: 'programs', icon: explorerIcon, href: undefined },
 ] as const
 
 
@@ -38,7 +36,8 @@ const menuItems = [
         :rel="item.href ? 'noopener noreferrer' : undefined"
         :type="item.href ? undefined : 'button'"
       >
-        <span>{{ item.key === 'programs' ? messages.minesweeper : messages.startMenu[item.key] }}</span>
+        <img :src="item.icon" :alt="messages.startMenu[item.key]" />
+        <span>{{messages.startMenu[item.key] }}</span>
       </component>
     </div>
   </div>

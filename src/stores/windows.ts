@@ -21,11 +21,15 @@ export const useWindowsStore = defineStore('windows', () => {
     const existing = windows.value.find(w => w.id === win.id)
     if (existing) return focus(existing.id)
     const offset = windows.value.length * 24
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 699px)').matches
+    const initialPosition = isMobile
+      ? { x: 12, y: 16 }
+      : { x: 160 + offset, y: 80 + offset }
     windows.value.push({
       ...win,
       minimized: false,
       zIndex: ++topZ,
-      position: { x: 160 + offset, y: 80 + offset },
+      position: initialPosition,
     })
     activeId.value = win.id
   }
