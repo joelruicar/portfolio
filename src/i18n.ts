@@ -22,11 +22,13 @@ type Translation = {
     about: string
     contact: string
     projects: string
+    skills: string
   }
   file: string
   edit: string
   view: string
   socials: string
+  start: string
 }
 
 const translations: Record<Locale, Translation> = {
@@ -52,8 +54,10 @@ const translations: Record<Locale, Translation> = {
       about: 'Aquí puedes contar quién eres y cuál es tu experiencia.',
       contact: 'Aquí puedes añadir tus datos de contacto y tus redes.',
       projects: 'Aquí puedes mostrar tus proyectos y trabajos destacados.',
+      skills: 'Aquí puedes listar tus tecnologías, lenguajes y herramientas.',
     },
-    socials: 'Redes sociales'
+    socials: 'Redes sociales',
+    start: 'Inicio'
   },
   en: {
     about: 'About me',
@@ -77,8 +81,10 @@ const translations: Record<Locale, Translation> = {
       about: 'Here you can tell people who you are and share your experience.',
       contact: 'Here you can add your contact details and social profiles.',
       projects: 'Here you can showcase your projects and featured work.',
+      skills: 'Here you can list your technologies, languages, and tools.',
     },
-    socials:'Socials'
+    socials: 'Socials',
+    start: 'Start'
   },
   de: {
     about: 'Über mich',
@@ -102,8 +108,10 @@ const translations: Record<Locale, Translation> = {
       about: 'Hier kannst du erzählen, wer du bist und welche Erfahrungen du hast.',
       contact: 'Hier kannst du deine Kontaktdaten und sozialen Profile hinzufügen.',
       projects: 'Hier kannst du deine Projekte und herausragenden Arbeiten zeigen.',
+      skills: 'Hier kannst du deine Technologien, Sprachen und Werkzeuge auflisten.',
     },
-    socials: 'Social Media'
+    socials: 'Social Media',
+    start: 'Start'
   },
 }
 

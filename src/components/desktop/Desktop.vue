@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, type Component } from 'vue'
+import { ref, computed, onMounted, type Component } from 'vue'
 
 import Taskbar from '../Taskbar.vue'
 import DesktopIcon from './DesktopIcon.vue'
@@ -9,10 +9,13 @@ import Contact from '../windows/Contact.vue'
 import Projects from '../windows/Projects.vue'
 import Minesweeper from '../windows/Minesweeper.vue'
 import CMD from '../windows/CMD.vue'
+import Skills from '../windows/Skills.vue'
 import wordpadIcon from '../../assets/wordpad.ico'
 import contactIcon from '../../assets/contact.ico'
 import directoryIcon from '../../assets/directory.ico'
 import paintIcon from '../../assets/paint.ico'
+import minesweeperIcon from '../../assets/minesweeper.png'
+import promptIcon from '../../assets/prompt.ico'
 import { useI18n } from '../../i18n'
 import { useWindowsStore, type OsWindow } from '../../stores/windows'
 
@@ -25,20 +28,23 @@ const windowComponents: Record<OsWindow['folder'], Component> = {
   contact: Contact,
   projects: Projects,
   minesweeper: Minesweeper,
-  run: CMD
+  run: CMD,
+  skills: Skills,
 }
 
-const icons = ref([
+const icons = ref<Array<{ id: OsWindow['folder']; icon: string; x: number; y: number }>>([
   { id: 'about', icon: wordpadIcon, x: 24, y: 24 },
   { id: 'projects', icon: directoryIcon, x: 24, y: 108 },
   { id: 'skills', icon: paintIcon, x: 24, y: 192 },
   { id: 'contact', icon: contactIcon, x: 24, y: 276 },
+  { id: 'minesweeper', icon: minesweeperIcon, x: 24, y: 360 },
+  { id: 'run', icon: promptIcon, x: 24, y: 444 },
 ])
 
 const translatedIcons = computed(() =>
   icons.value.map((icon) => ({
     ...icon,
-    label: messages.value[icon.id as 'about' | 'contact' | 'projects' | 'skills'],
+    label: messages.value[icon.id],
   })),
 )
 
@@ -137,9 +143,9 @@ function finishIconDrag() {
 function openIcon(icon: (typeof icons.value)[number]) {
   windows.open({
     id: icon.id,
-    title: messages.value[icon.id as 'about' | 'contact' | 'projects' | 'skills'],
+    title: messages.value[icon.id],
     icon: icon.icon,
-    folder: icon.id as 'about' | 'contact' | 'projects' 
+    folder: icon.id,
   })
 }
 
@@ -196,6 +202,13 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
     icon.y += boundedDelta.y
   })
 }
+
+onMounted(() => {
+  const aboutIcon = icons.value.find((icon) => icon.id === 'about')
+  if (aboutIcon) {
+    openIcon(aboutIcon)
+  }
+})
 </script>
 
 <template>
@@ -228,6 +241,7 @@ function moveIcon(id: string, delta: { x: number; y: number }) {
       :z-index="10000 + window.zIndex"
       :position="window.position"
       :compact="window.folder === 'minesweeper'"
+      :active="windows.activeId === window.id"
       @close="windows.close(window.id)"
       @minimize="windows.minimize(window.id)"
       @focus="windows.focus(window.id)"

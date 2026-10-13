@@ -7,7 +7,7 @@ const { messages } = useI18n()
 <template>
   <section class="contact-window">
     <h2>{{ messages.skills }}</h2>
-    <p>{{ messages.content.contact }}</p>
+    <p>{{ messages.content.skills }}</p>
   </section>
 </template>
 

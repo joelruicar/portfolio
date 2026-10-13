@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import minesweeperIcon from '../assets/minesweeper/img/Icon.png'
 import explorerIcon from '../assets/explorer.ico'
 import linkedIcon from '../assets/linked.ico'
 import gitIcon from '../assets/git.ico'
-import promptIcon from '../assets/prompt.ico'
 import { useI18n } from '../i18n'
 
 const emit = defineEmits<{
@@ -17,15 +15,9 @@ const menuItems = [
   { key: 'linked', icon: linkedIcon, href: 'https://www.linkedin.com/in/joel-ruiz-bbab68240' },
   { key: 'git', icon: gitIcon, href: 'https://github.com/joelruicar' },
   { key: 'programs', icon: explorerIcon, href: undefined },
-  { key: 'run', icon: promptIcon, href: undefined },
 ] as const
 
-type MenuItemKey = (typeof menuItems)[number]['key']
 
-function handleItemClick(key: MenuItemKey) {
-  if (key === 'programs') emit('open-minesweeper')
-  if (key === 'run') emit('open-cmd')
-}
 </script>
 
 <template>
@@ -45,9 +37,7 @@ function handleItemClick(key: MenuItemKey) {
         :target="item.href ? '_blank' : undefined"
         :rel="item.href ? 'noopener noreferrer' : undefined"
         :type="item.href ? undefined : 'button'"
-        @click="handleItemClick(item.key)"
       >
-        <img :src="item.key === 'programs' ? minesweeperIcon : item.icon" alt="">
         <span>{{ item.key === 'programs' ? messages.minesweeper : messages.startMenu[item.key] }}</span>
       </component>
     </div>

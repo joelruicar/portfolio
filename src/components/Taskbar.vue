@@ -3,10 +3,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n, type Locale } from '../i18n'
 import { useWindowsStore } from '../stores/windows'
 import StartMenu from './StartMenu.vue'
-import minesweeperIcon from '../assets/minesweeper/img/Icon.png'
+import minesweeperIcon from '../assets/minesweeper.png'
 import promptIcon from '../assets/prompt.ico'
 import soundIcon from '../assets/sound.svg'
 import start from '../assets/start.ico'
+import linkedIcon from '../assets/linked.ico'
+import gitIcon from '../assets/git.ico'
 const store = useWindowsStore()
 const time = ref('')
 const menuOpen = ref(false)
@@ -105,9 +107,32 @@ onUnmounted(() => {
         :aria-expanded="menuOpen"
         @click="menuOpen = !menuOpen"
       >
-        <img :src="start" alt="" /> <span>{{ messages.socials }}</span>
+        <img :src="start" alt="" /> <span>{{ messages.start }}</span>
       </button>
       <StartMenu v-if="menuOpen" @open-minesweeper="openMinesweeper" @open-cmd="openCMD" />
+    </div>
+    <div class="quick-launch" aria-label="Quick Launch">
+      <span class="quick-launch__handle" aria-hidden="true" />
+      <a
+        class="quick-launch__item"
+        href="https://github.com/joelruicar"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="GitHub"
+        aria-label="GitHub"
+      >
+        <img :src="gitIcon" alt="" />
+      </a>
+      <a
+        class="quick-launch__item"
+        href="https://www.linkedin.com/in/joel-ruiz-bbab68240"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="LinkedIn"
+        aria-label="LinkedIn"
+      >
+        <img :src="linkedIcon" alt="" />
+      </a>
     </div>
     <div class="taskbar__items">
       <button
@@ -119,7 +144,7 @@ onUnmounted(() => {
         :aria-pressed="store.activeId === window.id && !window.minimized"
         @click="toggleWindow(window.id)"
       >
-        <img v-if="window.icon.endsWith('.ico')" :src="window.icon" alt="" />
+        <img v-if="window.icon" :src="window.icon" alt="" />
         <span>{{ messages[window.folder] }}</span>
       </button>
     </div>
@@ -168,6 +193,48 @@ onUnmounted(() => {
   z-index: 9999; 
 }
 .taskbar__items { display: flex; gap: 2px; flex: 1; }
+
+.quick-launch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 3px;
+}
+
+.quick-launch__handle {
+  width: 3px;
+  height: 22px;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #fff;
+  margin-right: 2px;
+}
+
+.quick-launch__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.quick-launch__item:hover {
+  border-color: #fff #808080 #808080 #fff;
+}
+
+.quick-launch__item:active {
+  border-color: #808080 #fff #fff #808080;
+}
+
+.quick-launch__item img {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
 
 .start-button,
 .taskbar__item {
@@ -376,6 +443,21 @@ onUnmounted(() => {
   .start-button span,
   .taskbar__item span {
     display: none;
+  }
+
+  .quick-launch {
+    padding: 0 1px;
+    gap: 1px;
+  }
+
+  .quick-launch__item {
+    width: 20px;
+    height: 20px;
+  }
+
+  .quick-launch__item img {
+    width: 14px;
+    height: 14px;
   }
 
   .start-button {

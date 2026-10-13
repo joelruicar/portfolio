@@ -24,6 +24,7 @@ const props = defineProps<{
   zIndex: number
   position: { x: number; y: number }
   compact?: boolean
+  active?: boolean
 }>()
 
 onMounted(() => {
@@ -118,8 +119,8 @@ function startResize(event: PointerEvent, direction: string) {
     y: event.clientY,
     width: rect.width,
     height: rect.height,
-    left: rect.left,
-    top: rect.top,
+    left: props.position.x,
+    top: props.position.y,
   }
   resizing.value = true
   emit('focus')
@@ -134,20 +135,36 @@ function resize(event: PointerEvent) {
   const direction = resizeDirection.value
   const minWidth = props.compact ? 180 : 260
   const minHeight = props.compact ? 160 : 180
+
+  const frame = frameElement.value
+  const desktop = frame?.parentElement
+  const desktopWidth = desktop ? desktop.clientWidth : window.innerWidth
+  const desktopHeight = desktop ? desktop.clientHeight - 35 : window.innerHeight - 35
+
   let width = start.width
   let height = start.height
-  let left = props.position.x
-  let top = props.position.y
+  let left = start.left
+  let top = start.top
 
-  if (direction.includes('e')) width = Math.max(minWidth, start.width + event.clientX - start.x)
-  if (direction.includes('s')) height = Math.max(minHeight, start.height + event.clientY - start.y)
+  if (direction.includes('e')) {
+    const maxWidth = Math.max(minWidth, desktopWidth - start.left)
+    width = Math.min(maxWidth, Math.max(minWidth, start.width + event.clientX - start.x))
+  }
+  if (direction.includes('s')) {
+    const maxHeight = Math.max(minHeight, desktopHeight - start.top)
+    height = Math.min(maxHeight, Math.max(minHeight, start.height + event.clientY - start.y))
+  }
   if (direction.includes('w')) {
-    width = Math.max(minWidth, start.width - event.clientX + start.x)
-    left = props.position.x + start.width - width
+    const maxWidth = start.left + start.width
+    const rawWidth = start.width - (event.clientX - start.x)
+    width = Math.min(maxWidth, Math.max(minWidth, rawWidth))
+    left = start.left + start.width - width
   }
   if (direction.includes('n')) {
-    height = Math.max(minHeight, start.height - event.clientY + start.y)
-    top = props.position.y + start.height - height
+    const maxHeight = start.top + start.height
+    const rawHeight = start.height - (event.clientY - start.y)
+    height = Math.min(maxHeight, Math.max(minHeight, rawHeight))
+    top = start.top + start.height - height
   }
 
   size.value = { width, height }
@@ -172,7 +189,13 @@ onUnmounted(() => {
   <article
     ref="frameElement"
     class="window"
-    :class="{ 'window--dragging': dragging, 'window--resizing': resizing, 'window--maximized': maximized, 'window--compact': compact }"
+    :class="{
+      'window--dragging': dragging,
+      'window--resizing': resizing,
+      'window--maximized': maximized,
+      'window--compact': compact,
+      'window--inactive': active === false
+    }"
     :style="windowStyle"
     @pointerdown="emit('focus')"
   >
@@ -186,7 +209,7 @@ onUnmounted(() => {
       @open="toggleMaximize"
     >
       <div class="window__title">
-        <img v-if="icon.endsWith('.ico') || icon.endsWith('.png')" :src="icon" alt="" />
+        <img v-if="icon.includes('.ico') || icon.includes('.png') || icon.includes('.svg') || icon.startsWith('data:')" :src="icon" alt="" />
         <span v-else aria-hidden="true">{{ icon }}</span>
         <span>{{ title }}</span>
       </div>
@@ -256,6 +279,11 @@ onUnmounted(() => {
   color: #fff;
   background: #000080;
   font-weight: bold;
+}
+
+.window--inactive .window__titlebar {
+  background: #808080;
+  color: #c0c0c0;
 }
 
 .window__title,

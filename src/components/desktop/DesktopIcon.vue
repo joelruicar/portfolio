@@ -20,21 +20,24 @@ const emit = defineEmits<{
 const dragging = ref(false)
 const moved = ref(false)
 const pointer = ref({ x: 0, y: 0 })
+const startPointer = ref({ x: 0, y: 0 })
 
 function onPointerDown(event: PointerEvent) {
+  if (event.button !== 0) return
   event.preventDefault()
   emit('select')
   emit('dragStart')
   dragging.value = true
   moved.value = false
   pointer.value = { x: event.clientX, y: event.clientY }
+  startPointer.value = { x: event.clientX, y: event.clientY }
   ;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId)
 }
 
 function onPointerMove(event: PointerEvent) {
   if (!dragging.value) return
 
-  if (Math.hypot(event.clientX - pointer.value.x, event.clientY - pointer.value.y) > 3) {
+  if (Math.hypot(event.clientX - startPointer.value.x, event.clientY - startPointer.value.y) > 3) {
     moved.value = true
   }
 
@@ -46,13 +49,14 @@ function onPointerMove(event: PointerEvent) {
 }
 
 function onPointerUp(event: PointerEvent) {
+  if (!dragging.value) return
   dragging.value = false
   const target = event.currentTarget as HTMLElement
   if (target.hasPointerCapture(event.pointerId)) {
     target.releasePointerCapture(event.pointerId)
   }
 
-  if (event.pointerType === 'touch' && !moved.value) {
+  if (!moved.value) {
     emit('open')
   }
   emit('drop')
@@ -70,10 +74,11 @@ function onPointerUp(event: PointerEvent) {
     @pointerup="onPointerUp"
     @pointercancel="onPointerUp"
     @dragstart.prevent
-    @dblclick.stop="emit('open')"
+    @keydown.enter.prevent="emit('open')"
+    @keydown.space.prevent="emit('open')"
   >
     <img
-      v-if="icon.endsWith('.ico')"
+      v-if="icon.includes('.ico') || icon.includes('.png') || icon.includes('.svg') || icon.startsWith('data:')"
       class="icon"
       :src="icon"
       alt=""
