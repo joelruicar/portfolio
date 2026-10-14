@@ -11,6 +11,7 @@ import frigleamIcon from '../../assets/frigleam.ico'
 import cttImg from '../../assets/CTT.png'
 import frigleamImg from '../../assets/frigleam.png'
 import deskImg from '../../assets/desk.jpg'
+import ollamaImg from '../../assets/ollama.png'
 
 const emit = defineEmits<{
   close: []
@@ -41,7 +42,7 @@ const projectImages: Record<string, string | null> = {
   ctt: cttImg,
   frigleam: frigleamImg,
   portfolio: deskImg,
-  ollama: null, // Placeholder for ollama-chat
+  ollama: ollamaImg,
 }
 
 // Current projects list from i18n
@@ -314,38 +315,9 @@ onUnmounted(() => {
 
         <!-- Preview Graphic Container -->
         <div class="inspector-preview-box">
-          <!-- Ollama Placeholder Graphic -->
+          <!-- Real Image Preview -->
           <div
-            v-if="selectedProject.id === 'ollama'"
-            class="ollama-placeholder-screen"
-          >
-            <div class="crt-scanlines" />
-            <div class="crt-content">
-              <div class="crt-header-tag">
-                [ OLLAMA WEB CHAT • LOCAL SERVER ]
-              </div>
-              <div class="crt-terminal-code">
-                <span class="prompt-sym">&gt;</span> ollama run llama3:latest<br />
-                <span class="prompt-sym">&gt;</span> Loading model weights (8B
-                parameters)...<br />
-                <span class="prompt-sym">&gt;</span> Server online on
-                http://localhost:11434<br />
-                <span class="prompt-sym">&gt;</span> Ready for stream
-                chat...<span class="crt-cursor">_</span>
-              </div>
-              <div class="crt-placeholder-notice">
-                <span class="placeholder-icon">📷</span>
-                <strong>[ Captura de pantalla de Ollama-chat ]</strong>
-                <p>
-                  Placeholder listo para tu imagen (coloca ollama.png en assets)
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Real Image Preview for CTT, Frigleam, Portfolio -->
-          <div
-            v-else-if="projectImages[selectedProject.id]"
+            v-if="projectImages[selectedProject.id]"
             class="image-preview-wrapper"
           >
             <img
@@ -876,95 +848,6 @@ onUnmounted(() => {
   object-fit: contain;
   display: block;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Ollama CRT Screen Placeholder */
-.ollama-placeholder-screen {
-  position: relative;
-  width: 100%;
-  min-height: 180px;
-  background: #0d120d;
-  color: #4ade80;
-  font-family: 'Courier New', Courier, monospace;
-  padding: 12px;
-  box-sizing: border-box;
-  overflow: hidden;
-  border: 2px inset #000;
-}
-
-.crt-scanlines {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.25) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-}
-
-.crt-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.crt-header-tag {
-  font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  color: #86efac;
-  border-bottom: 1px dashed rgba(74, 222, 128, 0.4);
-  padding-bottom: 4px;
-}
-
-.crt-terminal-code {
-  font-size: 11px;
-  line-height: 1.4;
-  color: #a7f3d0;
-}
-
-.prompt-sym {
-  color: #34d399;
-  font-weight: bold;
-}
-
-.crt-cursor {
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-.crt-placeholder-notice {
-  margin-top: 6px;
-  padding: 8px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.4);
-  color: #f0fdf4;
-  font-size: 11px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 2px;
-}
-
-.placeholder-icon {
-  font-size: 18px;
-}
-
-.crt-placeholder-notice p {
-  margin: 0;
-  font-size: 9.5px;
-  color: #a7f3d0;
 }
 
 .generic-placeholder {
