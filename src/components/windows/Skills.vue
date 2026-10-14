@@ -335,7 +335,6 @@ function drawInitialSkills() {
     ctx.fillStyle = '#555555'
     ctx.font = 'italic 11px w95fa, sans-serif'
     ctx.textAlign = 'center'
-    ctx.fillText(messages.value.paint.canvas.hint, w / 2, bottomY + 20)
   } else {
     // -------------------------------------------------------------
     // 2 COLUMNAS (PANTALLA ANCHA / DESKTOP)
@@ -389,10 +388,10 @@ function drawInitialSkills() {
     ctx.beginPath()
     ctx.arc(px + 10, py + 10, 8, 0, Math.PI * 2)
     ctx.fill()
-    const dotColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff']
+    const dotColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00']
     dotColors.forEach((c, idx) => {
       ctx.fillStyle = c
-      const angle = (idx * Math.PI) / 3 - 0.5
+      const angle = ((idx+4) * Math.PI) / 4
       ctx.beginPath()
       ctx.arc(px + Math.cos(angle) * 16, py + Math.sin(angle) * 16, 4, 0, Math.PI * 2)
       ctx.fill()
@@ -420,7 +419,6 @@ function drawInitialSkills() {
     ctx.fillStyle = '#606060'
     ctx.font = 'italic 12px w95fa, sans-serif'
     ctx.textAlign = 'center'
-    ctx.fillText(messages.value.paint.canvas.hint, w / 2, h - 22)
   }
 
   undoStack.value = []

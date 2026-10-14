@@ -45,7 +45,6 @@ export type PaintTranslation = {
   }
   canvas: {
     title: string
-    hint: string
     skills: Array<{ title: string; desc: string; color: string }>
   }
   tools: Record<PaintToolKey, { name: string; desc: string }>
@@ -240,14 +239,13 @@ const translations: Record<Locale, Translation> = {
       },
       canvas: {
         title: '★ MIS HABILIDADES & TECNOLOGÍAS ★',
-        hint: '✏️ ¡Lienzo interactivo! Puedes pintar o borrar aquí.',
         skills: [
-          { title: 'Vue 3 & TypeScript', desc: 'Composition API • Pinia • Reactividad', color: '#42b883' },
-          { title: 'JavaScript (ES6+)', desc: 'Async / Await • Web APIs • Código Limpio', color: '#f7df1e' },
-          { title: 'HTML5 & Canvas 2D', desc: 'Gráficos interactivos • SVG • Semántica', color: '#e44d26' },
-          { title: 'CSS3 & Retro UI', desc: 'Pixel Art • Grid • Flex • Responsive', color: '#2965f1' },
-          { title: 'Vite & Bundling', desc: 'Recarga rápida • Builds optimizados • CI/CD', color: '#bd34fe' },
-          { title: 'Git & GitHub', desc: 'Ramas • Flujos de trabajo • Control de versiones', color: '#f05032' },
+          { title: 'Vue 3 & React', desc: 'Pinia • Vite • Reactividad • Componentes', color: '#42b883' },
+          { title: 'JavaScript & TypeScript', desc: 'Async/Await • Web APIs • Código limpio', color: '#f7df1e' },
+          { title: 'HTML5 & CSS', desc: 'Responsive • Accesibilidad • Gráficos interactivos', color: '#e44d26' },
+          { title: 'Python & Django', desc: 'REST APIs • ORM • Autenticación', color: '#2965f1' },
+          { title: 'Cloud & DevOps', desc: 'AWS • Docker • CI/CD', color: '#bd34fe' },
+          { title: 'Git & GitHub', desc: 'Pull Requests • Code Review • Resolución de conflictos', color: '#f9a9fb' },
         ],
       },
       statusHelp: 'Para obtener ayuda, haga clic en Ayuda en el menú.',
@@ -334,7 +332,7 @@ const translations: Record<Locale, Translation> = {
   Desarrollador Frontend & Full-Stack
 ======================================================================
 
-¡Hola y bienvenido a mi portfolio retro interactivo!
+¡Hola y bienvenido a mi portfolio retro!
 
 [PERFIL]
 Soy Joel, un desarrollador de software apasionado por la arquitectura web limpia, las interfaces interactivas y creativas, y la experiencia de usuario cuidada al detalle.
@@ -358,20 +356,13 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
 • Japonés:              Principiante (A1)
 
 [INTERESES]
-• Arte digital & modelado 3D (Blender)
+• Arte digital & modelado 3D
 • Idiomas y lingüística extranjera
-• Colectivo LGBT & voluntariado (DEI)
-• Senderismo y naturaleza (Hiking)
-
-[FILOSOFÍA]
-Creo que el mejor software es aquel que no solo resuelve problemas
-complejos de manera eficiente, sino que también transmite personalidad
-y resulta agradable para las personas que lo utilizan.
+• Colectivo LGBT & DEI
 
 [CONTACTO]
 • Correo:    joel.ruiz2180@gmail.com
 • Ubicación: Valencia, España (Abierto a relocalización)
-• Teléfono:  +34 600 00 00 00
 
 ======================================================================`,
     },
@@ -502,14 +493,13 @@ y resulta agradable para las personas que lo utilizan.
       },
       canvas: {
         title: '★ MY SKILLS & TECHNOLOGIES ★',
-        hint: '✏️ Interactive canvas: you can paint or draw here!',
         skills: [
-          { title: 'Vue 3 & TypeScript', desc: 'Composition API • Pinia • Reactivity', color: '#42b883' },
-          { title: 'JavaScript (ES6+)', desc: 'Async / Await • Web APIs • Clean Code', color: '#f7df1e' },
-          { title: 'HTML5 & Canvas 2D', desc: 'Interactive Graphics • SVG • Semantics', color: '#e44d26' },
-          { title: 'CSS3 & Retro UI', desc: 'Pixel Art • Grid • Flex • Responsive', color: '#2965f1' },
-          { title: 'Vite & Bundling', desc: 'Hot Reload • Optimized Builds • CI/CD', color: '#bd34fe' },
-          { title: 'Git & GitHub', desc: 'Branches • Workflows • Version Control', color: '#f05032' },
+          { title: 'Vue 3 & React', desc: 'Pinia • Vite • Reactivity • Components', color: '#42b883' },
+          { title: 'JavaScript & TypeScript', desc: 'Async/Await • Web APIs • Clean Code', color: '#f7df1e' },
+          { title: 'HTML5 & CSS', desc: 'Responsive • Accessibility • Interactive Graphics', color: '#e44d26' },
+          { title: 'Python & Django', desc: 'REST APIs • ORM • Authentication', color: '#2965f1' },
+          { title: 'Cloud & DevOps', desc: 'AWS • Docker • CI/CD', color: '#bd34fe' },
+          { title: 'Git & GitHub', desc: 'Pull Requests • Code Review • Conflict Resolution', color: '#f9a9fb' },
         ],
       },
       statusHelp: 'For Help, click Help Topics on the Help Menu.',
@@ -596,7 +586,7 @@ y resulta agradable para las personas que lo utilizan.
   Frontend & Full-Stack Developer
 ======================================================================
 
-Hello and welcome to my interactive retro Windows 95 portfolio!
+Hello and welcome to my retro portfolio!
 
 [PROFILE]
 I am Joel, a software developer dedicated to building modern, high-performance, and visually captivating web applications.
@@ -626,15 +616,9 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
 • LGBT community & volunteer work (DEI)
 • Hiking & outdoor adventures
 
-[PHILOSOPHY]
-I believe exceptional software should not only solve complex problems
-efficiently, but also convey personality and delight every person who
-interacts with it.
-
 [CONTACT]
 • Email:     joel.ruiz2180@gmail.com
 • Location:  Valencia, Spain (Open to relocation)
-• Phone:     +34 600 00 00 00
 
 ======================================================================`,
     },
@@ -765,14 +749,13 @@ interacts with it.
       },
       canvas: {
         title: '★ MEINE FÄHIGKEITEN & TECHNOLOGIEN ★',
-        hint: '✏️ Interaktive Leinwand: Du kannst hier malen oder zeichnen!',
         skills: [
-          { title: 'Vue 3 & TypeScript', desc: 'Composition API • Pinia • Reaktivität', color: '#42b883' },
-          { title: 'JavaScript (ES6+)', desc: 'Async / Await • Web-APIs • Sauberer Code', color: '#f7df1e' },
-          { title: 'HTML5 & Canvas 2D', desc: 'Interaktive Grafiken • SVG • Semantik', color: '#e44d26' },
-          { title: 'CSS3 & Retro UI', desc: 'Pixel Art • Grid • Flex • Responsiv', color: '#2965f1' },
-          { title: 'Vite & Bundling', desc: 'Schneller Reload • Optimierte Builds • CI/CD', color: '#bd34fe' },
-          { title: 'Git & GitHub', desc: 'Branches • Workflows • Versionskontrolle', color: '#f05032' },
+          { title: 'Vue 3 & React', desc: 'Pinia • Vite • Reaktivität • Komponenten', color: '#42b883' },
+          { title: 'JavaScript & TypeScript', desc: 'Async/Await • Web APIs • Sauberer Code', color: '#f7df1e' },
+          { title: 'HTML5 & CSS', desc: 'Responsive • Barrierefreiheit • Interaktive Grafiken', color: '#e44d26' },
+          { title: 'Python & Django', desc: 'REST APIs • ORM • Authentifizierung', color: '#2965f1' },
+          { title: 'Cloud & DevOps', desc: 'AWS • Docker • CI/CD', color: '#bd34fe' },
+          { title: 'Git & GitHub', desc: 'Pull Requests • Code Review • Konfliktlösung', color: '#f9a9fb' },
         ],
       },
       statusHelp: 'Für Hilfe klicken Sie im Menü auf Hilfe.',
@@ -859,7 +842,7 @@ interacts with it.
   Frontend- & Full-Stack-Entwickler
 ======================================================================
 
-Hallo und willkommen zu meinem interaktiven Retro-Portfolio!
+Hallo und willkommen zu meinem Retro-Portfolio!
 
 [PROFIL]
 Ich bin Joel, ein Softwareentwickler mit Leidenschaft für saubere Webarchitektur, interaktive und kreative Oberflächen und sorgfältig gestaltete Benutzererlebnisse.
@@ -888,15 +871,9 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
 • LGBT-Community & Ehrenamt (DEI)
 • Wandern & Outdoor-Aktivitäten (Hiking)
 
-[PHILOSOPHIE]
-Ich bin überzeugt, dass großartige Software nicht nur komplexe Probleme
-effizient lösen sollte, sondern auch Persönlichkeit ausstrahlen und Freude
-bei der Nutzung bereiten muss.
-
 [KONTAKT]
 • E-Mail:    joel.ruiz2180@gmail.com
 • Standort:  Valencia, Spanien (Bereit für einen Ortswechsel)
-• Telefon:   +34 600 00 00 00
 
 ======================================================================`,
     },
