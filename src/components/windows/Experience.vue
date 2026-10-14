@@ -19,10 +19,10 @@ const { messages } = useI18n()
 
       <div class="cv-header__actions">
         <a
-          href="/resume.pdf"
+          href="/cv.pdf"
           download="Joel_Ruiz_CV.pdf"
           class="retro-btn retro-btn--primary"
-          title="Descargar archivo resume.pdf"
+          title="Descargar archivo cv.pdf"
         >
           {{ messages.cv.downloadPdfBtn }}
         </a>
