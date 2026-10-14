@@ -157,6 +157,90 @@ export type CvTranslation = {
   licenseText: string
 }
 
+export type ProjectItem = {
+  id: string
+  title: string
+  category: string
+  badgeText: string
+  statusText: string
+  shortDesc: string
+  fullDesc: string
+  highlights: string[]
+  tech: string[]
+  liveUrl?: string
+  githubUrl: string
+  isLocalOnly?: boolean
+  fileSize: string
+  modifiedDate: string
+  typeDesc: string
+}
+
+export type ProjectsTranslation = {
+  headerPath: string
+  menu: {
+    file: string
+    edit: string
+    view: string
+    help: string
+    open: string
+    properties: string
+    exit: string
+    largeIcons: string
+    details: string
+    refresh: string
+    aboutExplorer: string
+  }
+  toolbar: {
+    back: string
+    forward: string
+    viewIcons: string
+    viewDetails: string
+    properties: string
+  }
+  columns: {
+    name: string
+    type: string
+    size: string
+    modified: string
+  }
+  status: {
+    itemsCount: string
+    selectedCount: string
+    fileSystem: string
+  }
+  actions: {
+    liveDemo: string
+    githubRepo: string
+    properties: string
+    localNotice: string
+    localBadge: string
+    openApp: string
+  }
+  propertiesDialog: {
+    title: string
+    tabGeneral: string
+    tabTech: string
+    tabHighlights: string
+    typeLabel: string
+    locationLabel: string
+    sizeLabel: string
+    createdLabel: string
+    repoLabel: string
+    liveLabel: string
+    statusLabel: string
+    okBtn: string
+  }
+  aboutDialog: {
+    title: string
+    heading: string
+    subheading: string
+    dev: string
+    version: string
+    okBtn: string
+  }
+  items: ProjectItem[]
+}
+
 type Translation = {
   about: string
   contact: string
@@ -186,6 +270,7 @@ type Translation = {
   paint: PaintTranslation
   notepad: NotepadTranslation
   cv: CvTranslation
+  projectsApp: ProjectsTranslation
 }
 
 const translations: Record<Locale, Translation> = {
@@ -209,7 +294,8 @@ const translations: Record<Locale, Translation> = {
     view: 'Ver',
     content: {
       about: 'Aquí puedes contar quién eres y cuál es tu experiencia.',
-      contact: 'Aquí puedes consultar mi trayectoria laboral y experiencia como desarrollador.',
+      contact:
+        'Aquí puedes consultar mi trayectoria laboral y experiencia como desarrollador.',
       projects: 'Aquí puedes mostrar tus proyectos y trabajos destacados.',
       skills: 'Aquí puedes listar tus tecnologías, lenguajes y herramientas.',
     },
@@ -240,39 +326,100 @@ const translations: Record<Locale, Translation> = {
       canvas: {
         title: '★ MIS HABILIDADES & TECNOLOGÍAS ★',
         skills: [
-          { title: 'Vue 3 & React', desc: 'Pinia • Vite • Reactividad • Componentes', color: '#42b883' },
-          { title: 'JavaScript & TypeScript', desc: 'Async/Await • Web APIs • Código limpio', color: '#f7df1e' },
-          { title: 'HTML5 & CSS', desc: 'Responsive • Accesibilidad • Gráficos interactivos', color: '#e44d26' },
-          { title: 'Python & Django', desc: 'REST APIs • ORM • Autenticación', color: '#2965f1' },
-          { title: 'Cloud & DevOps', desc: 'AWS • Docker • CI/CD', color: '#bd34fe' },
-          { title: 'Git & GitHub', desc: 'Pull Requests • Code Review • Resolución de conflictos', color: '#f9a9fb' },
+          {
+            title: 'Vue 3 & React',
+            desc: 'Pinia • Vite • Reactividad • Componentes',
+            color: '#42b883',
+          },
+          {
+            title: 'JavaScript & TypeScript',
+            desc: 'Async/Await • Web APIs • Código limpio',
+            color: '#f7df1e',
+          },
+          {
+            title: 'HTML5 & CSS',
+            desc: 'Responsive • Accesibilidad • Gráficos interactivos',
+            color: '#e44d26',
+          },
+          {
+            title: 'Python & Django',
+            desc: 'REST APIs • ORM • Autenticación',
+            color: '#2965f1',
+          },
+          {
+            title: 'Cloud & DevOps',
+            desc: 'AWS • Docker • CI/CD',
+            color: '#bd34fe',
+          },
+          {
+            title: 'Git & GitHub',
+            desc: 'Pull Requests • Code Review • Resolución de conflictos',
+            color: '#f9a9fb',
+          },
         ],
       },
       statusHelp: 'Para obtener ayuda, haga clic en Ayuda en el menú.',
       tools: {
-        star_select: { name: 'Selección libre', desc: 'Selecciona un área de forma libre para mover o editar.' },
-        rect_select: { name: 'Selección rectangular', desc: 'Selecciona una zona rectangular del dibujo.' },
-        eraser: { name: 'Borrador', desc: 'Borra áreas del dibujo usando el color secundario.' },
-        bucket: { name: 'Relleno con color', desc: 'Rellena un área cerrada con el color seleccionado.' },
-        picker: { name: 'Selector de color', desc: 'Toma una muestra de color directamente del lienzo.' },
-        magnifier: { name: 'Lupa', desc: 'Amplía o reduce el tamaño de visualización del lienzo.' },
-        pencil: { name: 'Lápiz', desc: 'Dibuja líneas a mano alzada de 1 píxel de grosor.' },
-        brush: { name: 'Pincel', desc: 'Pinta trazos a mano alzada con diferentes formas y grosores.' },
-        airbrush: { name: 'Aerógrafo', desc: 'Pinta con efecto de pulverización / aerosol.' },
-        text: { name: 'Texto', desc: 'Inserta texto en el dibujo con la fuente seleccionada.' },
+        star_select: {
+          name: 'Selección libre',
+          desc: 'Selecciona un área de forma libre para mover o editar.',
+        },
+        rect_select: {
+          name: 'Selección rectangular',
+          desc: 'Selecciona una zona rectangular del dibujo.',
+        },
+        eraser: {
+          name: 'Borrador',
+          desc: 'Borra áreas del dibujo usando el color secundario.',
+        },
+        bucket: {
+          name: 'Relleno con color',
+          desc: 'Rellena un área cerrada con el color seleccionado.',
+        },
+        picker: {
+          name: 'Selector de color',
+          desc: 'Toma una muestra de color directamente del lienzo.',
+        },
+        magnifier: {
+          name: 'Lupa',
+          desc: 'Amplía o reduce el tamaño de visualización del lienzo.',
+        },
+        pencil: {
+          name: 'Lápiz',
+          desc: 'Dibuja líneas a mano alzada de 1 píxel de grosor.',
+        },
+        brush: {
+          name: 'Pincel',
+          desc: 'Pinta trazos a mano alzada con diferentes formas y grosores.',
+        },
+        airbrush: {
+          name: 'Aerógrafo',
+          desc: 'Pinta con efecto de pulverización / aerosol.',
+        },
+        text: {
+          name: 'Texto',
+          desc: 'Inserta texto en el dibujo con la fuente seleccionada.',
+        },
         line: { name: 'Línea recta', desc: 'Dibuja una línea recta.' },
         curve: { name: 'Curva', desc: 'Dibuja una línea curva.' },
         rect: { name: 'Rectángulo', desc: 'Dibuja rectángulos o cuadrados.' },
-        polygon: { name: 'Polígono', desc: 'Dibuja formas poligonales con múltiples vértices.' },
+        polygon: {
+          name: 'Polígono',
+          desc: 'Dibuja formas poligonales con múltiples vértices.',
+        },
         ellipse: { name: 'Elipse', desc: 'Dibuja elipses o círculos.' },
-        round_rect: { name: 'Rectángulo redondeado', desc: 'Dibuja rectángulos con esquinas redondeadas.' },
+        round_rect: {
+          name: 'Rectángulo redondeado',
+          desc: 'Dibuja rectángulos con esquinas redondeadas.',
+        },
       },
       aboutDialog: {
         title: 'Acerca de Paint & Habilidades',
         heading: 'Portfolio MS Paint Edition',
         subheading: 'Desarrollado con Vue 3 + TypeScript',
         specialty: 'Especialidad: Desarrollo Frontend & Full-Stack',
-        skillsTitle: 'Tecnologías principales: Vue 3, Pinia, TypeScript, Vite, Canvas 2D, CSS3 Pixel Art, Git.',
+        skillsTitle:
+          'Tecnologías principales: Vue 3, Pinia, TypeScript, Vite, Canvas 2D, CSS3 Pixel Art, Git.',
         ok: 'Aceptar',
       },
     },
@@ -370,7 +517,8 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
       headerTitle: 'EXPERIENCIA LABORAL',
       headerSubtitle: 'Joel Ruiz • Ingeniero de Software & Desarrollador Web',
       downloadPdfBtn: 'Descargar CV (PDF)',
-      downloadPdfNote: 'Currículum Vitae oficial en formato PDF descargable directamente.',
+      downloadPdfNote:
+        'Currículum Vitae oficial en formato PDF descargable directamente.',
       openPdfBtn: 'Abrir PDF ↗',
       experience: [
         {
@@ -382,7 +530,14 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
             'Desarrollo de servicios backend y esquemas de bases de datos relacionales (MySQL, Django) para alimentar paneles analíticos de supervisión académica utilizados por +50 profesores.',
             'Colaboración en el desarrollo de aplicaciones web con JavaScript, CSS y WordPress, entregando soluciones centradas en el usuario según especificaciones.',
           ],
-          tech: ['Django', 'MySQL', 'JavaScript', 'CSS', 'WordPress', 'REST APIs'],
+          tech: [
+            'Django',
+            'MySQL',
+            'JavaScript',
+            'CSS',
+            'WordPress',
+            'REST APIs',
+          ],
         },
         {
           company: 'Cliente Local',
@@ -405,23 +560,34 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
             'Prototipado y lanzamiento de portal corporativo de marca, respetando pautas estrictas de diseño y mejores prácticas UI/UX.',
             'Elaboración de documentación técnica exhaustiva y guías de estilo de código para garantizar la mantenibilidad y un onboarding ágil.',
           ],
-          tech: ['WordPress', 'JavaScript', 'Web Components', 'UI/UX', 'Technical Docs', 'Code Guidelines'],
+          tech: [
+            'WordPress',
+            'JavaScript',
+            'Web Components',
+            'UI/UX',
+            'Technical Docs',
+            'Code Guidelines',
+          ],
         },
       ],
       education: [
         {
           institution: 'Universitat Politècnica de València',
           period: 'Sept 2023 – Sept 2026',
-          degree: 'Máster Universitario en Computación Cloud y Altas Prestaciones',
+          degree:
+            'Máster Universitario en Computación Cloud y Altas Prestaciones',
           location: 'Valencia, España',
-          thesis: 'Migración frontend integral de plataforma cloud a SPA reactiva en Vue 3 y TypeScript. Integración de servicios AWS (AWS Cognito, API Gateway, Lambda) y diseño de cuadros de mando analíticos.',
+          thesis:
+            'Migración frontend integral de plataforma cloud a SPA reactiva en Vue 3 y TypeScript. Integración de servicios AWS (AWS Cognito, API Gateway, Lambda) y diseño de cuadros de mando analíticos.',
         },
         {
           institution: 'Universitat Politècnica de València',
           period: 'Sept 2019 – Sept 2023',
-          degree: 'Grado en Ingeniería Informática (Mención Ingeniería del Software)',
+          degree:
+            'Grado en Ingeniería Informática (Mención Ingeniería del Software)',
           location: 'Valencia, España',
-          thesis: 'Desarrollo de plataforma social médica para revisiones y consultas de procedimientos utilizando React, Django y REST APIs.',
+          thesis:
+            'Desarrollo de plataforma social médica para revisiones y consultas de procedimientos utilizando React, Django y REST APIs.',
         },
       ],
       languages: [
@@ -438,9 +604,191 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
       },
       thesisLabel: 'Trabajo Final:',
       interestsLabel: 'Intereses:',
-      interestsText: 'Arte digital, idiomas extranjeros, cultura japonesa, voluntariado en colectivo LGBT local (DEI).',
+      interestsText:
+        'Arte digital, idiomas extranjeros, cultura japonesa, voluntariado en colectivo LGBT local (DEI).',
       licenseLabel: 'Permiso de conducir:',
       licenseText: 'Clase B',
+    },
+    projectsApp: {
+      headerPath: 'C:\\Joel\\Proyectos',
+      menu: {
+        file: 'Archivo',
+        edit: 'Edición',
+        view: 'Ver',
+        help: 'Ayuda',
+        open: 'Abrir proyecto',
+        properties: 'Propiedades',
+        exit: 'Cerrar',
+        largeIcons: 'Iconos grandes',
+        details: 'Detalles',
+        refresh: 'Actualizar',
+        aboutExplorer: 'Acerca del Explorador de Proyectos',
+      },
+      toolbar: {
+        back: 'Atrás',
+        forward: 'Adelante',
+        viewIcons: 'Iconos',
+        viewDetails: 'Detalles',
+        properties: 'Propiedades',
+      },
+      columns: {
+        name: 'Nombre',
+        type: 'Tipo',
+        size: 'Tamaño',
+        modified: 'Fecha',
+      },
+      status: {
+        itemsCount: '4 objeto(s)',
+        selectedCount: '1 objeto seleccionado',
+        fileSystem: 'Sistema FAT32',
+      },
+      actions: {
+        liveDemo: 'Demo en vivo ↗',
+        githubRepo: 'Código en GitHub ↗',
+        properties: 'Propiedades',
+        localNotice: 'Proyecto ejecutado en entorno local / servidor Ollama',
+        localBadge: 'Local / Ollama API',
+        openApp: 'Abrir enlace',
+      },
+      propertiesDialog: {
+        title: 'Propiedades de {name}',
+        tabGeneral: 'General',
+        tabTech: 'Tecnologías',
+        tabHighlights: 'Puntos clave',
+        typeLabel: 'Tipo de archivo:',
+        locationLabel: 'Ubicación:',
+        sizeLabel: 'Tamaño en disco:',
+        createdLabel: 'Año de desarrollo:',
+        repoLabel: 'Repositorio:',
+        liveLabel: 'Despliegue:',
+        statusLabel: 'Estado:',
+        okBtn: 'Aceptar',
+      },
+      aboutDialog: {
+        title: 'Acerca del Explorador de Proyectos',
+        heading: 'Microsoft® Windows® 95 Explorer',
+        subheading: 'Explorador de Proyectos - Portfolio Edition',
+        dev: 'Desarrollador: Joel Ruiz (@joelruicar)',
+        version: 'Versión 4.0.950 (Proyectos destacados: 4)',
+        okBtn: 'Aceptar',
+      },
+      items: [
+        {
+          id: 'ctt',
+          title: 'CloudTrail-Tracker',
+          category: 'TFM • Computación Cloud & Altas Prestaciones (UPV)',
+          badgeText: 'TFM UPV',
+          statusText: 'Producción / Cloud',
+          shortDesc:
+            'Plataforma SPA reactiva para supervisión y análisis de auditorías AWS CloudTrail.',
+          fullDesc:
+            'Desarrollado como Trabajo Fin de Máster (TFM) en Computación Cloud y Altas Prestaciones (UPV). Plataforma SPA reactiva de analítica avanzada que procesa eventos de auditoría AWS CloudTrail, integrando autenticación segura con AWS Cognito, APIs serverless con API Gateway y Lambda, y cuadros de mando interactivos en tiempo real.',
+          highlights: [
+            'Migración frontend integral a SPA reactiva moderna con Vue 3, TypeScript y Vite',
+            'Integración con servicios AWS Cloud: Cognito (Auth), API Gateway y Lambda',
+            'Paneles de análisis y visualización de trazas de seguridad en tiempo real',
+          ],
+          tech: [
+            'Vue 3',
+            'TypeScript',
+            'AWS Lambda',
+            'AWS Cognito',
+            'API Gateway',
+            'CloudTrail',
+            'Vite',
+          ],
+          liveUrl: 'https://dashboard.cursocloudaws.net/',
+          githubUrl: 'https://github.com/joelruicar/CloudTrail-Trackerv3',
+          fileSize: '4.82 MB',
+          modifiedDate: '2024-07-15',
+          typeDesc: 'Aplicación Web Cloud (SPA)',
+        },
+        {
+          id: 'frigleam',
+          title: 'Frigleam',
+          category: 'Serverless Edge • Lenguaje Gleam & OCR',
+          badgeText: 'Gleam + Edge',
+          statusText: 'Producción / Edge',
+          shortDesc:
+            'Lista de la compra colaborativa en Gleam con Cloudflare Workers y digitalización OCR.',
+          fullDesc:
+            'Aplicación colaborativa de listas de la compra programada en Gleam (lenguaje de tipado estático funcional sobre BEAM/JS) y desplegada en la red edge global de Cloudflare Workers. Incorpora reconocimiento óptico de caracteres (OCR) para transformar listas de papel escritas a mano o impresas en listas interactivas y sincronizadas.',
+          highlights: [
+            'Desarrollo full-stack con el lenguaje funcional emergente Gleam',
+            'Despliegue serverless de baja latencia en la red Edge de Cloudflare Workers',
+            'Extracción y digitalización de listas físicas mediante procesado OCR',
+          ],
+          tech: [
+            'Gleam',
+            'Cloudflare Workers',
+            'OCR Vision',
+            'Web APIs',
+            'Tailwind CSS',
+          ],
+          liveUrl: 'https://frigo.frigleam.workers.dev/',
+          githubUrl: 'https://github.com/joelruicar/Frigleam',
+          fileSize: '1.24 MB',
+          modifiedDate: '2024-06-20',
+          typeDesc: 'Aplicación Serverless Edge',
+        },
+        {
+          id: 'portfolio',
+          title: 'Retro OS Portfolio',
+          category: 'Creative Frontend • Sistema Windows 95',
+          badgeText: 'Este Portfolio',
+          statusText: 'Activo',
+          shortDesc:
+            'Portfolio interactivo fiel a Windows 95 con ventanas arrastrables, apps funcionales e i18n.',
+          fullDesc:
+            'Portfolio interactivo diseñado como un clon fiel del sistema operativo Windows 95. Desarrollado con Vue 3, Pinia y TypeScript. Incluye gestión completa de ventanas (arrastrar, redimensionar, minimizar, maximizar, z-index), barra de tareas, menú de inicio, soporte multi-idioma (ES/EN/DE), editor de texto funcional y clon de Buscaminas.',
+          highlights: [
+            'Gestor de ventanas propio con soporte para arrastrar, redimensionar y z-index',
+            'Internacionalización reactiva en tiempo real (Español, Inglés y Alemán)',
+            'Aplicaciones interactivas retro (Notepad, MS Paint con Canvas, Buscaminas, CMD)',
+          ],
+          tech: [
+            'Vue 3',
+            'TypeScript',
+            'Pinia',
+            'Vite',
+            'CSS3 Pixel Art',
+            'i18n',
+          ],
+          liveUrl: '#',
+          githubUrl: 'https://github.com/joelruicar/portfolio',
+          fileSize: '2.40 MB',
+          modifiedDate: '2024-10-14',
+          typeDesc: 'Sistema Operativo Web (Vue 3)',
+        },
+        {
+          id: 'ollama',
+          title: 'Ollama Web Chat',
+          category: 'Local AI • LLM Client & Token Streaming',
+          badgeText: 'Local LLM',
+          statusText: 'Local / Self-hosted',
+          shortDesc:
+            'Cliente web ligero para conversar con modelos LLM ejecutados en local con Ollama.',
+          fullDesc:
+            'Interfaz web moderna para interactuar de forma fluida con modelos de lenguaje de gran tamaño (LLMs) ejecutados en servidor local mediante Ollama. Soporta streaming de respuestas en tiempo real (Server-Sent Events / ReadableStream), formateo de Markdown con resaltado de sintaxis de código y privacidad total sin dependencias en la nube.',
+          highlights: [
+            'Streaming reactivo de respuestas token a token sin latencia percibida',
+            'Renderizado limpio de Markdown, listas y bloques de código formateados',
+            'Privacidad y soberanía de datos 100% en local sin telemetría externa',
+          ],
+          tech: [
+            'TypeScript',
+            'Ollama API',
+            'Token Streaming',
+            'Markdown UI',
+            'Local AI',
+          ],
+          isLocalOnly: true,
+          githubUrl: 'https://github.com/joelruicar/Ollama-chat',
+          fileSize: '850 KB',
+          modifiedDate: '2024-09-10',
+          typeDesc: 'Cliente Web de IA Local',
+        },
+      ],
     },
   },
   en: {
@@ -463,7 +811,8 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
     view: 'View',
     content: {
       about: 'Here you can tell people who you are and share your experience.',
-      contact: 'Here you can check my career trajectory and work experience as a developer.',
+      contact:
+        'Here you can check my career trajectory and work experience as a developer.',
       projects: 'Here you can showcase your projects and featured work.',
       skills: 'Here you can list your technologies, languages, and tools.',
     },
@@ -494,39 +843,97 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
       canvas: {
         title: '★ MY SKILLS & TECHNOLOGIES ★',
         skills: [
-          { title: 'Vue 3 & React', desc: 'Pinia • Vite • Reactivity • Components', color: '#42b883' },
-          { title: 'JavaScript & TypeScript', desc: 'Async/Await • Web APIs • Clean Code', color: '#f7df1e' },
-          { title: 'HTML5 & CSS', desc: 'Responsive • Accessibility • Interactive Graphics', color: '#e44d26' },
-          { title: 'Python & Django', desc: 'REST APIs • ORM • Authentication', color: '#2965f1' },
-          { title: 'Cloud & DevOps', desc: 'AWS • Docker • CI/CD', color: '#bd34fe' },
-          { title: 'Git & GitHub', desc: 'Pull Requests • Code Review • Conflict Resolution', color: '#f9a9fb' },
+          {
+            title: 'Vue 3 & React',
+            desc: 'Pinia • Vite • Reactivity • Components',
+            color: '#42b883',
+          },
+          {
+            title: 'JavaScript & TypeScript',
+            desc: 'Async/Await • Web APIs • Clean Code',
+            color: '#f7df1e',
+          },
+          {
+            title: 'HTML5 & CSS',
+            desc: 'Responsive • Accessibility • Interactive Graphics',
+            color: '#e44d26',
+          },
+          {
+            title: 'Python & Django',
+            desc: 'REST APIs • ORM • Authentication',
+            color: '#2965f1',
+          },
+          {
+            title: 'Cloud & DevOps',
+            desc: 'AWS • Docker • CI/CD',
+            color: '#bd34fe',
+          },
+          {
+            title: 'Git & GitHub',
+            desc: 'Pull Requests • Code Review • Conflict Resolution',
+            color: '#f9a9fb',
+          },
         ],
       },
       statusHelp: 'For Help, click Help Topics on the Help Menu.',
       tools: {
-        star_select: { name: 'Free-form Select', desc: 'Selects a free-form area to move or edit.' },
-        rect_select: { name: 'Select', desc: 'Selects a rectangular area of the drawing.' },
-        eraser: { name: 'Eraser', desc: 'Erases parts of the drawing using the secondary color.' },
-        bucket: { name: 'Fill With Color', desc: 'Fills an enclosed area with the selected color.' },
-        picker: { name: 'Pick Color', desc: 'Picks a color sample directly from the canvas.' },
-        magnifier: { name: 'Magnifier', desc: 'Zooms the canvas view in or out.' },
+        star_select: {
+          name: 'Free-form Select',
+          desc: 'Selects a free-form area to move or edit.',
+        },
+        rect_select: {
+          name: 'Select',
+          desc: 'Selects a rectangular area of the drawing.',
+        },
+        eraser: {
+          name: 'Eraser',
+          desc: 'Erases parts of the drawing using the secondary color.',
+        },
+        bucket: {
+          name: 'Fill With Color',
+          desc: 'Fills an enclosed area with the selected color.',
+        },
+        picker: {
+          name: 'Pick Color',
+          desc: 'Picks a color sample directly from the canvas.',
+        },
+        magnifier: {
+          name: 'Magnifier',
+          desc: 'Zooms the canvas view in or out.',
+        },
         pencil: { name: 'Pencil', desc: 'Draws 1-pixel freehand lines.' },
-        brush: { name: 'Brush', desc: 'Paints freehand strokes with selected shapes and sizes.' },
-        airbrush: { name: 'Airbrush', desc: 'Paints with an aerosol spray effect.' },
-        text: { name: 'Text', desc: 'Inserts text into the drawing with selected font.' },
+        brush: {
+          name: 'Brush',
+          desc: 'Paints freehand strokes with selected shapes and sizes.',
+        },
+        airbrush: {
+          name: 'Airbrush',
+          desc: 'Paints with an aerosol spray effect.',
+        },
+        text: {
+          name: 'Text',
+          desc: 'Inserts text into the drawing with selected font.',
+        },
         line: { name: 'Line', desc: 'Draws a straight line.' },
         curve: { name: 'Curve', desc: 'Draws a curved line.' },
         rect: { name: 'Rectangle', desc: 'Draws rectangles or squares.' },
-        polygon: { name: 'Polygon', desc: 'Draws polygon shapes with multiple vertices.' },
+        polygon: {
+          name: 'Polygon',
+          desc: 'Draws polygon shapes with multiple vertices.',
+        },
         ellipse: { name: 'Ellipse', desc: 'Draws ellipses or circles.' },
-        round_rect: { name: 'Rounded Rectangle', desc: 'Draws rectangles with rounded corners.' },
+        round_rect: {
+          name: 'Rounded Rectangle',
+          desc: 'Draws rectangles with rounded corners.',
+        },
       },
       aboutDialog: {
         title: 'About Paint & Skills',
         heading: 'Portfolio MS Paint Edition',
         subheading: 'Built with Vue 3 + TypeScript',
         specialty: 'Specialty: Frontend & Full-Stack Development',
-        skillsTitle: 'Core Technologies: Vue 3, Pinia, TypeScript, Vite, Canvas 2D, CSS3 Pixel Art, Git.',
+        skillsTitle:
+          'Core Technologies: Vue 3, Pinia, TypeScript, Vite, Canvas 2D, CSS3 Pixel Art, Git.',
         ok: 'OK',
       },
     },
@@ -626,7 +1033,8 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
       headerTitle: 'WORK EXPERIENCE',
       headerSubtitle: 'Joel Ruiz • Software Engineer & Web Developer',
       downloadPdfBtn: 'Download CV (PDF)',
-      downloadPdfNote: 'Official Curriculum Vitae in PDF format, directly downloadable.',
+      downloadPdfNote:
+        'Official Curriculum Vitae in PDF format, directly downloadable.',
       openPdfBtn: 'Open PDF ↗',
       experience: [
         {
@@ -638,7 +1046,14 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
             'Developed backend services and relational database schemas (MySQL, Django) to power analytical monitoring dashboards for academic supervision, used by +50 professors.',
             'Collaborated on the development of web applications using JavaScript, CSS, and WordPress, delivering user-centric solutions according to stakeholder specifications.',
           ],
-          tech: ['Django', 'MySQL', 'JavaScript', 'CSS', 'WordPress', 'REST APIs'],
+          tech: [
+            'Django',
+            'MySQL',
+            'JavaScript',
+            'CSS',
+            'WordPress',
+            'REST APIs',
+          ],
         },
         {
           company: 'Local Client',
@@ -661,7 +1076,14 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
             'Prototyped and launched a corporate branding portal, adhering to strict design guidelines and UI/UX best practices.',
             'Authored comprehensive technical documentation and code guidelines to ensure long-term maintainability and seamless onboarding for developers.',
           ],
-          tech: ['WordPress', 'JavaScript', 'Web Components', 'UI/UX', 'Technical Docs', 'Code Guidelines'],
+          tech: [
+            'WordPress',
+            'JavaScript',
+            'Web Components',
+            'UI/UX',
+            'Technical Docs',
+            'Code Guidelines',
+          ],
         },
       ],
       education: [
@@ -670,14 +1092,16 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           period: 'Sept 2023 – Sept 2026',
           degree: 'Master’s Degree in Cloud and High-Performance Computing',
           location: 'Valencia, Spain',
-          thesis: 'Executed an end-to-end frontend migration of a cloud platform to a reactive Vue 3 / TypeScript SPA. Integrated AWS Cloud services (AWS Cognito, API Gateway, Lambda) and designed custom analytics dashboards.',
+          thesis:
+            'Executed an end-to-end frontend migration of a cloud platform to a reactive Vue 3 / TypeScript SPA. Integrated AWS Cloud services (AWS Cognito, API Gateway, Lambda) and designed custom analytics dashboards.',
         },
         {
           institution: 'Universitat Politècnica de València',
           period: 'Sept 2019 – Sept 2023',
           degree: 'Computer Engineering Degree, Software Major',
           location: 'Valencia, Spain',
-          thesis: 'Developed a full-stack social platform for medical procedure reviews and consultations using React, Django, and REST APIs.',
+          thesis:
+            'Developed a full-stack social platform for medical procedure reviews and consultations using React, Django, and REST APIs.',
         },
       ],
       languages: [
@@ -694,9 +1118,192 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
       },
       thesisLabel: 'Thesis:',
       interestsLabel: 'Interests:',
-      interestsText: 'Digital arts, foreign languages, Japanese culture, volunteer in local LGBT group (DEI).',
-      licenseLabel: 'Driver\'s License:',
+      interestsText:
+        'Digital arts, foreign languages, Japanese culture, volunteer in local LGBT group (DEI).',
+      licenseLabel: "Driver's License:",
       licenseText: 'Class B',
+    },
+    projectsApp: {
+      headerPath: 'C:\\Joel\\Projects',
+      menu: {
+        file: 'File',
+        edit: 'Edit',
+        view: 'View',
+        help: 'Help',
+        open: 'Open Project',
+        properties: 'Properties',
+        exit: 'Close',
+        largeIcons: 'Large Icons',
+        details: 'Details',
+        refresh: 'Refresh',
+        aboutExplorer: 'About Projects Explorer',
+      },
+      toolbar: {
+        back: 'Back',
+        forward: 'Forward',
+        viewIcons: 'Icons',
+        viewDetails: 'Details',
+        properties: 'Properties',
+      },
+      columns: {
+        name: 'Name',
+        type: 'Type',
+        size: 'Size',
+        modified: 'Date Modified',
+      },
+      status: {
+        itemsCount: '4 object(s)',
+        selectedCount: '1 object selected',
+        fileSystem: 'FAT32 File System',
+      },
+      actions: {
+        liveDemo: 'Live Demo ↗',
+        githubRepo: 'GitHub Repo ↗',
+        properties: 'Properties',
+        localNotice: 'Self-hosted project running in local environment',
+        localBadge: 'Local / Ollama API',
+        openApp: 'Open Link',
+      },
+      propertiesDialog: {
+        title: 'Properties of {name}',
+        tabGeneral: 'General',
+        tabTech: 'Tech Stack',
+        tabHighlights: 'Highlights',
+        typeLabel: 'Type of file:',
+        locationLabel: 'Location:',
+        sizeLabel: 'Size on disk:',
+        createdLabel: 'Development Year:',
+        repoLabel: 'Repository:',
+        liveLabel: 'Deployment:',
+        statusLabel: 'Status:',
+        okBtn: 'OK',
+      },
+      aboutDialog: {
+        title: 'About Projects Explorer',
+        heading: 'Microsoft® Windows® 95 Explorer',
+        subheading: 'Projects Explorer - Portfolio Edition',
+        dev: 'Developer: Joel Ruiz (@joelruicar)',
+        version: 'Version 4.0.950 (Featured Projects: 4)',
+        okBtn: 'OK',
+      },
+      items: [
+        {
+          id: 'ctt',
+          title: 'CloudTrail-Tracker',
+          category:
+            "Master's Thesis • Cloud & High Performance Computing (UPV)",
+          badgeText: 'UPV Thesis',
+          statusText: 'Production / Cloud',
+          shortDesc:
+            'Reactive SPA platform for monitoring and analyzing AWS CloudTrail audit logs.',
+          fullDesc:
+            "Developed as a Master's Thesis (TFM) in Cloud & High-Performance Computing at UPV. Advanced reactive analytics SPA processing AWS CloudTrail audit logs, integrating secure authentication with AWS Cognito, serverless APIs with API Gateway and Lambda, and real-time interactive analytical dashboards.",
+          highlights: [
+            'Complete frontend migration to modern reactive SPA with Vue 3, TypeScript, and Vite',
+            'Full integration with AWS Cloud services: Cognito (Auth), API Gateway, and Lambda',
+            'Analytical dashboards and real-time security trace visualization',
+          ],
+          tech: [
+            'Vue 3',
+            'TypeScript',
+            'AWS Lambda',
+            'AWS Cognito',
+            'API Gateway',
+            'CloudTrail',
+            'Vite',
+          ],
+          liveUrl: 'https://dashboard.cursocloudaws.net/',
+          githubUrl: 'https://github.com/joelruicar/CloudTrail-Trackerv3',
+          fileSize: '4.82 MB',
+          modifiedDate: '2024-07-15',
+          typeDesc: 'Cloud Web Application (SPA)',
+        },
+        {
+          id: 'frigleam',
+          title: 'Frigleam',
+          category: 'Serverless Edge • Gleam Language & OCR',
+          badgeText: 'Gleam + Edge',
+          statusText: 'Production / Edge',
+          shortDesc:
+            'Collaborative grocery list in Gleam with Cloudflare Workers and OCR digitization.',
+          fullDesc:
+            'Collaborative shopping list application written in Gleam (a type-safe functional language targeting BEAM/JS) and deployed on Cloudflare Workers edge network. Features Optical Character Recognition (OCR) to convert physical paper handwritten or printed grocery lists into synced interactive digital lists.',
+          highlights: [
+            'Full-stack development using the emerging functional language Gleam',
+            'Ultra-low latency serverless edge deployment on Cloudflare Workers',
+            'Physical list recognition and conversion via OCR vision processing',
+          ],
+          tech: [
+            'Gleam',
+            'Cloudflare Workers',
+            'OCR Vision',
+            'Web APIs',
+            'Tailwind CSS',
+          ],
+          liveUrl: 'https://frigo.frigleam.workers.dev/',
+          githubUrl: 'https://github.com/joelruicar/Frigleam',
+          fileSize: '1.24 MB',
+          modifiedDate: '2024-06-20',
+          typeDesc: 'Serverless Edge Application',
+        },
+        {
+          id: 'portfolio',
+          title: 'Retro OS Portfolio',
+          category: 'Creative Frontend • Windows 95 System',
+          badgeText: 'This Portfolio',
+          statusText: 'Active',
+          shortDesc:
+            'Faithful Windows 95 interactive portfolio with draggable windows, functional apps, and i18n.',
+          fullDesc:
+            'Interactive portfolio designed as a faithful recreation of the Windows 95 operating system. Built with Vue 3, Pinia, and TypeScript. Includes comprehensive window management (drag, resize, minimize, maximize, z-index), taskbar, start menu, multi-language internationalization (ES/EN/DE), functional text editor, and Minesweeper clone.',
+          highlights: [
+            'Custom window manager with drag, resize, minimize, maximize, and z-index ordering',
+            'Real-time multi-language internationalization (Spanish, English, and German)',
+            'Interactive retro apps (Notepad with file operations, MS Paint with Canvas, Minesweeper, CMD)',
+          ],
+          tech: [
+            'Vue 3',
+            'TypeScript',
+            'Pinia',
+            'Vite',
+            'CSS3 Pixel Art',
+            'i18n',
+          ],
+          liveUrl: '#',
+          githubUrl: 'https://github.com/joelruicar/portfolio',
+          fileSize: '2.40 MB',
+          modifiedDate: '2024-10-14',
+          typeDesc: 'Web Operating System (Vue 3)',
+        },
+        {
+          id: 'ollama',
+          title: 'Ollama Web Chat',
+          category: 'Local AI • LLM Client & Token Streaming',
+          badgeText: 'Local LLM',
+          statusText: 'Local / Self-hosted',
+          shortDesc:
+            'Lightweight web client for chatting with local LLMs running via Ollama server.',
+          fullDesc:
+            'Modern web interface for seamless communication with local large language models (LLMs) hosted via Ollama. Features real-time token streaming (Server-Sent Events / ReadableStream), Markdown parsing with code syntax highlighting, and absolute privacy with zero third-party cloud dependencies.',
+          highlights: [
+            'Zero-latency token streaming from local Ollama runtime',
+            'Clean Markdown parsing and structured code block rendering',
+            '100% on-premises data privacy without sending telemetry outside',
+          ],
+          tech: [
+            'TypeScript',
+            'Ollama API',
+            'Token Streaming',
+            'Markdown UI',
+            'Local AI',
+          ],
+          isLocalOnly: true,
+          githubUrl: 'https://github.com/joelruicar/Ollama-chat',
+          fileSize: '850 KB',
+          modifiedDate: '2024-09-10',
+          typeDesc: 'Local AI Web Client',
+        },
+      ],
     },
   },
   de: {
@@ -718,10 +1325,14 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
     edit: 'Bearbeiten',
     view: 'Sehen',
     content: {
-      about: 'Hier kannst du erzählen, wer du bist und welche Erfahrungen du hast.',
-      contact: 'Hier können Sie meinen beruflichen Werdegang und meine Arbeitserfahrung einsehen.',
-      projects: 'Hier kannst du deine Projekte und herausragenden Arbeiten zeigen.',
-      skills: 'Hier kannst du deine Technologien, Sprachen und Werkzeuge auflisten.',
+      about:
+        'Hier kannst du erzählen, wer du bist und welche Erfahrungen du hast.',
+      contact:
+        'Hier können Sie meinen beruflichen Werdegang und meine Arbeitserfahrung einsehen.',
+      projects:
+        'Hier kannst du deine Projekte und herausragenden Arbeiten zeigen.',
+      skills:
+        'Hier kannst du deine Technologien, Sprachen und Werkzeuge auflisten.',
     },
     socials: 'Social Media',
     start: 'Start',
@@ -750,39 +1361,91 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
       canvas: {
         title: '★ MEINE FÄHIGKEITEN & TECHNOLOGIEN ★',
         skills: [
-          { title: 'Vue 3 & React', desc: 'Pinia • Vite • Reaktivität • Komponenten', color: '#42b883' },
-          { title: 'JavaScript & TypeScript', desc: 'Async/Await • Web APIs • Sauberer Code', color: '#f7df1e' },
-          { title: 'HTML5 & CSS', desc: 'Responsive • Barrierefreiheit • Interaktive Grafiken', color: '#e44d26' },
-          { title: 'Python & Django', desc: 'REST APIs • ORM • Authentifizierung', color: '#2965f1' },
-          { title: 'Cloud & DevOps', desc: 'AWS • Docker • CI/CD', color: '#bd34fe' },
-          { title: 'Git & GitHub', desc: 'Pull Requests • Code Review • Konfliktlösung', color: '#f9a9fb' },
+          {
+            title: 'Vue 3 & React',
+            desc: 'Pinia • Vite • Reaktivität • Komponenten',
+            color: '#42b883',
+          },
+          {
+            title: 'JavaScript & TypeScript',
+            desc: 'Async/Await • Web APIs • Sauberer Code',
+            color: '#f7df1e',
+          },
+          {
+            title: 'HTML5 & CSS',
+            desc: 'Responsive • Barrierefreiheit • Interaktive Grafiken',
+            color: '#e44d26',
+          },
+          {
+            title: 'Python & Django',
+            desc: 'REST APIs • ORM • Authentifizierung',
+            color: '#2965f1',
+          },
+          {
+            title: 'Cloud & DevOps',
+            desc: 'AWS • Docker • CI/CD',
+            color: '#bd34fe',
+          },
+          {
+            title: 'Git & GitHub',
+            desc: 'Pull Requests • Code Review • Konfliktlösung',
+            color: '#f9a9fb',
+          },
         ],
       },
       statusHelp: 'Für Hilfe klicken Sie im Menü auf Hilfe.',
       tools: {
-        star_select: { name: 'Freiform-Auswahl', desc: 'Wählt einen Freiformbereich zum Verschieben oder Bearbeiten aus.' },
-        rect_select: { name: 'Auswahl', desc: 'Wählt einen rechteckigen Bereich der Zeichnung aus.' },
-        eraser: { name: 'Radierer', desc: 'Löscht Bereiche der Zeichnung mit der Hintergrundfarbe.' },
-        bucket: { name: 'Mit Farbe füllen', desc: 'Füllt einen geschlossenen Bereich mit der gewählten Farbe.' },
-        picker: { name: 'Farbauswahl', desc: 'Nimmt eine Farbprobe direkt von der Leinwand.' },
-        magnifier: { name: 'Lupe', desc: 'Vergrößert oder verkleinert die Leinwandansicht.' },
+        star_select: {
+          name: 'Freiform-Auswahl',
+          desc: 'Wählt einen Freiformbereich zum Verschieben oder Bearbeiten aus.',
+        },
+        rect_select: {
+          name: 'Auswahl',
+          desc: 'Wählt einen rechteckigen Bereich der Zeichnung aus.',
+        },
+        eraser: {
+          name: 'Radierer',
+          desc: 'Löscht Bereiche der Zeichnung mit der Hintergrundfarbe.',
+        },
+        bucket: {
+          name: 'Mit Farbe füllen',
+          desc: 'Füllt einen geschlossenen Bereich mit der gewählten Farbe.',
+        },
+        picker: {
+          name: 'Farbauswahl',
+          desc: 'Nimmt eine Farbprobe direkt von der Leinwand.',
+        },
+        magnifier: {
+          name: 'Lupe',
+          desc: 'Vergrößert oder verkleinert die Leinwandansicht.',
+        },
         pencil: { name: 'Bleistift', desc: 'Zeichnet 1-Pixel-Freihandlinien.' },
-        brush: { name: 'Pinsel', desc: 'Malt Freihandstriche mit verschiedenen Formen und Breiten.' },
+        brush: {
+          name: 'Pinsel',
+          desc: 'Malt Freihandstriche mit verschiedenen Formen und Breiten.',
+        },
         airbrush: { name: 'Sprühdose', desc: 'Malt mit einem Sprüheffekt.' },
         text: { name: 'Text', desc: 'Fügt Text in die Zeichnung ein.' },
         line: { name: 'Linie', desc: 'Zeichnet eine gerade Linie.' },
         curve: { name: 'Kurve', desc: 'Zeichnet eine gekrümmte Linie.' },
         rect: { name: 'Rechteck', desc: 'Zeichnet Rechtecke oder Quadrate.' },
-        polygon: { name: 'Polygon', desc: 'Zeichnet Polygonformen mit mehreren Ecken.' },
+        polygon: {
+          name: 'Polygon',
+          desc: 'Zeichnet Polygonformen mit mehreren Ecken.',
+        },
         ellipse: { name: 'Ellipse', desc: 'Zeichnet Ellipsen oder Kreise.' },
-        round_rect: { name: 'Abgerundetes Rechteck', desc: 'Zeichnet Rechtecke mit abgerundeten Ecken.' },
+        round_rect: {
+          name: 'Abgerundetes Rechteck',
+          desc: 'Zeichnet Rechtecke mit abgerundeten Ecken.',
+        },
       },
       aboutDialog: {
         title: 'Über Paint & Fähigkeiten',
         heading: 'Portfolio MS Paint Edition',
         subheading: 'Erstellt mit Vue 3 + TypeScript',
         specialty: 'Spezialgebiet: Frontend- & Full-Stack-Entwicklung',
-        skillsTitle: 'Kerntechnologien: Vue 3, Pinia, TypeScript, Vite, Canvas 2D, CSS3 Pixel Art, Git.',
+        skillsTitle:
+          'Kerntechnologien: Vue 3, Pinia, TypeScript, Vite, Canvas 2D, CSS3 Pixel Art, Git.',
         ok: 'OK',
       },
     },
@@ -881,7 +1544,8 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
       headerTitle: 'BERUFSERFAHRUNG',
       headerSubtitle: 'Joel Ruiz • Software-Ingenieur & Webentwickler',
       downloadPdfBtn: 'Lebenslauf herunterladen (PDF)',
-      downloadPdfNote: 'Offizieller Lebenslauf im PDF-Format, direkt herunterladbar.',
+      downloadPdfNote:
+        'Offizieller Lebenslauf im PDF-Format, direkt herunterladbar.',
       openPdfBtn: 'PDF öffnen ↗',
       experience: [
         {
@@ -893,7 +1557,14 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
             'Entwicklung von Backend-Diensten und relationalen Datenbankschemata (MySQL, Django) für analytische Überwachungs-Dashboards in der akademischen Betreuung (+50 Professoren).',
             'Zusammenarbeit bei der Entwicklung von Webanwendungen mit JavaScript, CSS und WordPress nach Stakeholder-Spezifikationen.',
           ],
-          tech: ['Django', 'MySQL', 'JavaScript', 'CSS', 'WordPress', 'REST APIs'],
+          tech: [
+            'Django',
+            'MySQL',
+            'JavaScript',
+            'CSS',
+            'WordPress',
+            'REST APIs',
+          ],
         },
         {
           company: 'Lokaler Kunde',
@@ -916,7 +1587,14 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
             'Prototyping und Einführung eines Corporate-Branding-Portals unter Einhaltung strenger Design- und UI/UX-Richtlinien.',
             'Erstellung umfassender technischer Dokumentationen und Code-Richtlinien zur Sicherstellung der Wartbarkeit und des reibungslosen Onboardings.',
           ],
-          tech: ['WordPress', 'JavaScript', 'Web Components', 'UI/UX', 'Technische Doku', 'Code Guidelines'],
+          tech: [
+            'WordPress',
+            'JavaScript',
+            'Web Components',
+            'UI/UX',
+            'Technische Doku',
+            'Code Guidelines',
+          ],
         },
       ],
       education: [
@@ -925,14 +1603,16 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
           period: 'Sept 2023 – Sept 2026',
           degree: 'Master in Cloud und High-Performance Computing',
           location: 'Valencia, Spanien',
-          thesis: 'End-to-End-Frontend-Migration einer Cloud-Plattform zu einer reaktiven Vue 3 / TypeScript SPA. Integration von AWS-Cloud-Diensten (Cognito, API Gateway, Lambda) und Design von Analyse-Dashboards.',
+          thesis:
+            'End-to-End-Frontend-Migration einer Cloud-Plattform zu einer reaktiven Vue 3 / TypeScript SPA. Integration von AWS-Cloud-Diensten (Cognito, API Gateway, Lambda) und Design von Analyse-Dashboards.',
         },
         {
           institution: 'Universitat Politècnica de València',
           period: 'Sept 2019 – Sept 2023',
           degree: 'Bachelor in Informatik (Schwerpunkt Software Engineering)',
           location: 'Valencia, Spanien',
-          thesis: 'Full-Stack-Plattform für medizinische Verfahrensbewertungen und -beratungen mit React, Django und REST-APIs.',
+          thesis:
+            'Full-Stack-Plattform für medizinische Verfahrensbewertungen und -beratungen mit React, Django und REST-APIs.',
         },
       ],
       languages: [
@@ -949,9 +1629,191 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
       },
       thesisLabel: 'Abschlussarbeit:',
       interestsLabel: 'Interessen:',
-      interestsText: 'Digitale Kunst, Fremdsprachen, japanische Kultur, Ehrenamt in lokaler LGBT-Gruppe (DEI).',
+      interestsText:
+        'Digitale Kunst, Fremdsprachen, japanische Kultur, Ehrenamt in lokaler LGBT-Gruppe (DEI).',
       licenseLabel: 'Führerschein:',
       licenseText: 'Klasse B',
+    },
+    projectsApp: {
+      headerPath: 'C:\\Joel\\Projekte',
+      menu: {
+        file: 'Datei',
+        edit: 'Bearbeiten',
+        view: 'Ansicht',
+        help: 'Hilfe',
+        open: 'Projekt öffnen',
+        properties: 'Eigenschaften',
+        exit: 'Schließen',
+        largeIcons: 'Große Symbole',
+        details: 'Details',
+        refresh: 'Aktualisieren',
+        aboutExplorer: 'Über den Projekt-Explorer',
+      },
+      toolbar: {
+        back: 'Zurück',
+        forward: 'Vorwärts',
+        viewIcons: 'Symbole',
+        viewDetails: 'Details',
+        properties: 'Eigenschaften',
+      },
+      columns: {
+        name: 'Name',
+        type: 'Typ',
+        size: 'Größe',
+        modified: 'Änderungsdatum',
+      },
+      status: {
+        itemsCount: '4 Objekt(e)',
+        selectedCount: '1 Objekt ausgewählt',
+        fileSystem: 'FAT32-Dateisystem',
+      },
+      actions: {
+        liveDemo: 'Live-Demo ↗',
+        githubRepo: 'GitHub-Repo ↗',
+        properties: 'Eigenschaften',
+        localNotice: 'Lokales / selbst gehostetes Projekt auf Ollama-Server',
+        localBadge: 'Lokal / Ollama API',
+        openApp: 'Link öffnen',
+      },
+      propertiesDialog: {
+        title: 'Eigenschaften von {name}',
+        tabGeneral: 'Allgemein',
+        tabTech: 'Technologien',
+        tabHighlights: 'Highlights',
+        typeLabel: 'Dateityp:',
+        locationLabel: 'Speicherort:',
+        sizeLabel: 'Größe auf Datenträger:',
+        createdLabel: 'Entwicklungsjahr:',
+        repoLabel: 'Repository:',
+        liveLabel: 'Bereitstellung:',
+        statusLabel: 'Status:',
+        okBtn: 'OK',
+      },
+      aboutDialog: {
+        title: 'Über den Projekt-Explorer',
+        heading: 'Microsoft® Windows® 95 Explorer',
+        subheading: 'Projekt-Explorer - Portfolio Edition',
+        dev: 'Entwickler: Joel Ruiz (@joelruicar)',
+        version: 'Version 4.0.950 (Vorgestellte Projekte: 4)',
+        okBtn: 'OK',
+      },
+      items: [
+        {
+          id: 'ctt',
+          title: 'CloudTrail-Tracker',
+          category: 'Masterarbeit • Cloud- & Hochleistungs-Computing (UPV)',
+          badgeText: 'UPV Masterarbeit',
+          statusText: 'Produktion / Cloud',
+          shortDesc:
+            'Reaktive SPA-Plattform zur Überwachung und Analyse von AWS CloudTrail-Audit-Logs.',
+          fullDesc:
+            'Entwickelt als Masterarbeit (TFM) im Studiengang Cloud- und Hochleistungs-Computing an der UPV. Eine fortschrittliche reaktive Analyse-SPA, die AWS CloudTrail-Auditereignisse verarbeitet, mit sicherer Authentifizierung über AWS Cognito, serverlosen APIs mit API Gateway und Lambda sowie interaktiven Dashboards in Echtzeit.',
+          highlights: [
+            'Vollständige Frontend-Migration zu einer modernen reaktiven SPA mit Vue 3, TypeScript und Vite',
+            'Umfassende Integration von AWS Cloud-Diensten: Cognito, API Gateway und Lambda',
+            'Analytische Dashboards und Echtzeit-Visualisierung von Sicherheitsspuren',
+          ],
+          tech: [
+            'Vue 3',
+            'TypeScript',
+            'AWS Lambda',
+            'AWS Cognito',
+            'API Gateway',
+            'CloudTrail',
+            'Vite',
+          ],
+          liveUrl: 'https://dashboard.cursocloudaws.net/',
+          githubUrl: 'https://github.com/joelruicar/CloudTrail-Trackerv3',
+          fileSize: '4.82 MB',
+          modifiedDate: '2024-07-15',
+          typeDesc: 'Cloud-Webanwendung (SPA)',
+        },
+        {
+          id: 'frigleam',
+          title: 'Frigleam',
+          category: 'Serverless Edge • Gleam-Sprache & OCR',
+          badgeText: 'Gleam + Edge',
+          statusText: 'Produktion / Edge',
+          shortDesc:
+            'Kollaborative Einkaufsliste in Gleam mit Cloudflare Workers und OCR-Digitalisierung.',
+          fullDesc:
+            'Kollaborative Einkaufslisten-App, entwickelt in Gleam (funktionale Programmiersprache für BEAM/JS) und im globalen Edge-Netzwerk von Cloudflare Workers bereitgestellt. Beinhaltet optische Zeichenerkennung (OCR), um handgeschriebene oder gedruckte Papierlisten in synchronisierte digitale Listen umzuwandeln.',
+          highlights: [
+            'Full-Stack-Entwicklung mit der funktionalen Sprache Gleam',
+            'Ultraschnelle, latenzarme Bereitstellung auf Cloudflare Workers Edge',
+            'Digitalisierung physischer Listen durch OCR-Erkennung',
+          ],
+          tech: [
+            'Gleam',
+            'Cloudflare Workers',
+            'OCR Vision',
+            'Web APIs',
+            'Tailwind CSS',
+          ],
+          liveUrl: 'https://frigo.frigleam.workers.dev/',
+          githubUrl: 'https://github.com/joelruicar/Frigleam',
+          fileSize: '1.24 MB',
+          modifiedDate: '2024-06-20',
+          typeDesc: 'Serverless Edge-Anwendung',
+        },
+        {
+          id: 'portfolio',
+          title: 'Retro OS Portfolio',
+          category: 'Kreatives Frontend • Windows 95 System',
+          badgeText: 'Dieses Portfolio',
+          statusText: 'Aktiv',
+          shortDesc:
+            'Detailgetreues Windows 95-Portfolio mit verschiebbaren Fenstern, funktionalen Apps und i18n.',
+          fullDesc:
+            'Interaktives Web-Portfolio als originalgetreue Nachbildung des Windows 95-Betriebssystems. Entwickelt mit Vue 3, Pinia und TypeScript. Beinhaltet ein vollständiges Fenstermanagement (Ziehen, Skalieren, Minimieren, Maximieren, z-Index), Taskleiste, Startmenü, Mehrsprachigkeit (ES/EN/DE), Texteditor und Minesweeper-Klon.',
+          highlights: [
+            'Eigener Fenstermanager mit Zieh-, Größenänderungs- und z-Index-Unterstützung',
+            'Reaktive Mehrsprachigkeit in Echtzeit (Spanisch, Englisch und Deutsch)',
+            'Interaktive Retro-Apps (Editor mit Dateiaktionen, MS Paint mit Canvas, Minesweeper, CMD)',
+          ],
+          tech: [
+            'Vue 3',
+            'TypeScript',
+            'Pinia',
+            'Vite',
+            'CSS3 Pixel Art',
+            'i18n',
+          ],
+          liveUrl: '#',
+          githubUrl: 'https://github.com/joelruicar/portfolio',
+          fileSize: '2.40 MB',
+          modifiedDate: '2024-10-14',
+          typeDesc: 'Web-Betriebssystem (Vue 3)',
+        },
+        {
+          id: 'ollama',
+          title: 'Ollama Web Chat',
+          category: 'Lokale KI • LLM-Client & Token-Streaming',
+          badgeText: 'Lokales LLM',
+          statusText: 'Lokal / Self-hosted',
+          shortDesc:
+            'Leichtgewichtiger Web-Client für Chats mit lokalen LLMs über einen Ollama-Server.',
+          fullDesc:
+            'Moderne Weboberfläche zur flüssigen Interaktion mit lokalen Sprachmodellen (LLMs) über einen Ollama-Server. Unterstützt Echtzeit-Streaming von Token (Server-Sent Events / ReadableStream), Markdown-Rendering mit Code-Syntax-Hervorhebung und absolute Privatsphäre ohne Cloud-Abhängigkeiten.',
+          highlights: [
+            'Latenzfreies Token-Streaming von der lokalen Ollama-Laufzeit',
+            'Strukturiertes Markdown-Parsing und formatierte Code-Blöcke',
+            '100% lokaler Datenschutz ohne externe Datenübertragung',
+          ],
+          tech: [
+            'TypeScript',
+            'Ollama API',
+            'Token Streaming',
+            'Markdown UI',
+            'Lokale KI',
+          ],
+          isLocalOnly: true,
+          githubUrl: 'https://github.com/joelruicar/Ollama-chat',
+          fileSize: '850 KB',
+          modifiedDate: '2024-09-10',
+          typeDesc: 'Lokaler KI-Webclient',
+        },
+      ],
     },
   },
 }
