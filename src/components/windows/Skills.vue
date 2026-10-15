@@ -53,7 +53,7 @@ const overlayCtx = ref<CanvasRenderingContext2D | null>(null)
 
 // Dimensions of canvas (dynamically resized with screen)
 const canvasWidth = ref(560)
-const canvasHeight = ref(340)
+const canvasHeight = ref(400)
 
 // Cursor & status
 const mouseCoords = ref<{ x: number; y: number } | null>(null)
@@ -138,7 +138,7 @@ function updateCanvasSize() {
   const rect = viewportEl.value.getBoundingClientRect()
   const targetW = Math.max(260, Math.floor(rect.width - 8))
   const isSingleCol = targetW < 520
-  const minH = isSingleCol ? 460 : 320
+  const minH = isSingleCol ? 520 : 390
   const targetH = Math.max(minH, Math.floor(rect.height - 8))
 
   if (targetW !== canvasWidth.value || targetH !== canvasHeight.value) {
@@ -340,15 +340,19 @@ function drawInitialSkills() {
     // 2 COLUMNAS (PANTALLA ANCHA / DESKTOP)
     // -------------------------------------------------------------
     const startY = 68
-    const boxW = Math.min(260, Math.floor((w - 56) / 2))
-    const boxH = 50
-    const gapX = Math.max(12, Math.floor(w - 2 * boxW - 52))
+    const numRows = Math.ceil(skills.length / 2)
+    const gapX = 16
     const gapY = 14
+    const boxW = Math.min(250, Math.floor((w - 48 - gapX) / 2))
+    const boxH = 50
+    const gridW = 2 * boxW + gapX
+    const startX = Math.floor((w - gridW) / 2)
 
     skills.forEach((skill, i) => {
+      const isOddLast = i === skills.length - 1 && skills.length % 2 !== 0
       const col = i % 2
       const row = Math.floor(i / 2)
-      const bx = 26 + col * (boxW + gapX)
+      const bx = isOddLast ? Math.floor((w - boxW) / 2) : (startX + col * (boxW + gapX))
       const by = startY + row * (boxH + gapY)
 
       // Retro button / card frame
@@ -377,9 +381,12 @@ function drawInitialSkills() {
     })
 
     // Doodles on desktop
+    const cardsBottom = startY + numRows * (boxH + gapY)
+    const doodleY = Math.max(h - 45, cardsBottom + 32)
+
     ctx.save()
     const px = w - 46
-    const py = h - 45
+    const py = doodleY
     ctx.fillStyle = '#d2a679'
     ctx.beginPath()
     ctx.arc(px, py, 26, 0, Math.PI * 2)
@@ -391,7 +398,7 @@ function drawInitialSkills() {
     const dotColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00']
     dotColors.forEach((c, idx) => {
       ctx.fillStyle = c
-      const angle = ((idx+4) * Math.PI) / 4
+      const angle = ((idx + 4) * Math.PI) / 4
       ctx.beginPath()
       ctx.arc(px + Math.cos(angle) * 16, py + Math.sin(angle) * 16, 4, 0, Math.PI * 2)
       ctx.fill()
@@ -401,18 +408,18 @@ function drawInitialSkills() {
     // Smiley face doodle
     ctx.fillStyle = '#ffff00'
     ctx.beginPath()
-    ctx.arc(44, h - 42, 16, 0, Math.PI * 2)
+    ctx.arc(44, doodleY + 3, 16, 0, Math.PI * 2)
     ctx.fill()
     ctx.strokeStyle = '#000000'
     ctx.lineWidth = 1.5
     ctx.stroke()
     ctx.fillStyle = '#000000'
     ctx.beginPath()
-    ctx.arc(38, h - 46, 2, 0, Math.PI * 2)
-    ctx.arc(50, h - 46, 2, 0, Math.PI * 2)
+    ctx.arc(38, doodleY - 1, 2, 0, Math.PI * 2)
+    ctx.arc(50, doodleY - 1, 2, 0, Math.PI * 2)
     ctx.fill()
     ctx.beginPath()
-    ctx.arc(44, h - 42, 9, 0.2, Math.PI - 0.2)
+    ctx.arc(44, doodleY + 3, 9, 0.2, Math.PI - 0.2)
     ctx.stroke()
 
     // Footer friendly hint

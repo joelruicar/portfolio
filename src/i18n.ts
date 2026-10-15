@@ -356,6 +356,11 @@ const translations: Record<Locale, Translation> = {
             desc: 'Pull Requests • Code Review • Resolución de conflictos',
             color: '#f9a9fb',
           },
+          {
+            title: 'Databases',
+            desc: 'MySQL • Relational Schema Designs',
+            color: '#00758f',
+          },
         ],
       },
       statusHelp: 'Para obtener ayuda, haga clic en Ayuda en el menú.',
@@ -490,7 +495,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
 • Máster en Computación Cloud y Altas Prestaciones: UPV (2023–2026)
   - TFM: Migración integral de plataforma cloud a SPA reactiva (Vue 3,
     TypeScript). Integración de AWS (Cognito, API Gateway, Lambda) y
-    diseño de paneles analíticos.
+    diseño de paneles analíticos, usados en 11 cursos universitarios.
 
 • Grado en Ingeniería Informática (Mención Software): UPV (2019–2023)
   - TFG: Plataforma social médica full-stack para consultas y
@@ -498,9 +503,9 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
 
 [IDIOMAS]
 • Español & Valenciano: Nativo
-• Inglés:               C1 (Escala Cambridge)
+• Inglés:               C1
 • Alemán:               B1.1
-• Japonés:              Principiante (A1)
+• Japonés:              A1
 
 [INTERESES]
 • Arte digital & modelado 3D
@@ -546,7 +551,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
           location: 'Remoto',
           bullets: [
             'Arquitectura, diseño y despliegue de una aplicación web moderna para un cliente utilizando Astro y Netlify.',
-            'Optimización del frontend logrando excelentes puntuaciones de rendimiento y velocidad de carga.',
+            'Optimización del frontend logrando excelentes puntuaciones de rendimiento y velocidad de carga en Google Lighthouse.',
           ],
           tech: ['Astro', 'Netlify', 'Web Performance'],
         },
@@ -556,14 +561,12 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
           role: 'Junior Software Developer Intern',
           location: 'Valencia, España – Múnich, Alemania',
           bullets: [
-            'Análisis de especificaciones técnicas y requisitos de usuario para diseñar componentes web modulares y mantenibles alineados con directrices corporativas.',
-            'Prototipado y lanzamiento de portal corporativo de marca, respetando pautas estrictas de diseño y mejores prácticas UI/UX.',
-            'Elaboración de documentación técnica exhaustiva y guías de estilo de código para garantizar la mantenibilidad y un onboarding ágil.',
+            'Prototipado y lanzamiento de un portal de identidad corporativa, siguiendo estrictas directrices de diseño y las mejores prácticas de UI/UX, mediante el uso de JavaScript y WordPress.',
+            'Elaboración de documentación técnica y directrices para garantizar la mantenibilidad y facilitar la integración de nuevos desarrolladores'
           ],
           tech: [
             'WordPress',
             'JavaScript',
-            'Web Components',
             'UI/UX',
             'Technical Docs',
             'Code Guidelines',
@@ -578,7 +581,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
             'Máster Universitario en Computación Cloud y Altas Prestaciones',
           location: 'Valencia, España',
           thesis:
-            'Migración frontend integral de plataforma cloud a SPA reactiva en Vue 3 y TypeScript. Integración de servicios AWS (AWS Cognito, API Gateway, Lambda) y diseño de cuadros de mando analíticos.',
+            'Migración de una plataforma en la nube heredada a una SPA modular desarrollada con Vue 3 y TypeScript, respaldada por una infraestructura serverless de AWS (Lambda, API Gateway, Cognito); creación de paneles de análisis personalizados adoptados en 11 cursos universitarios.',
         },
         {
           institution: 'Universitat Politècnica de València',
@@ -592,9 +595,9 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
       ],
       languages: [
         { name: 'Español & Valenciano', level: 'Nativo' },
-        { name: 'Inglés', level: 'C1 (Escala Cambridge)' },
+        { name: 'Inglés', level: 'C1' },
         { name: 'Alemán', level: 'B1.1' },
-        { name: 'Japonés', level: 'Principiante (A1)' },
+        { name: 'Japonés', level: 'A1' },
       ],
       skillsSummary: {
         frontend: 'Vue 3, React, TypeScript, JavaScript, CSS, Gleam, Astro',
@@ -605,7 +608,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
       thesisLabel: 'Trabajo Final:',
       interestsLabel: 'Intereses:',
       interestsText:
-        'Arte digital, idiomas extranjeros, cultura japonesa, voluntariado en colectivo LGBT local (DEI).',
+        'Arte digital, Modelado 3D, Lenguas extranjeras, LGBT & DEI.',
       licenseLabel: 'Permiso de conducir:',
       licenseText: 'Clase B',
     },
@@ -677,7 +680,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
           id: 'ctt',
           title: 'CloudTrail-Tracker',
           category: 'TFM • Computación Cloud & Altas Prestaciones (UPV)',
-          badgeText: 'TFM UPV',
+          badgeText: 'TFM UPV: 9.5/10',
           statusText: 'Producción / Cloud',
           shortDesc:
             'Plataforma SPA reactiva para supervisión y análisis de auditorías AWS CloudTrail.',
@@ -686,7 +689,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
           highlights: [
             'Migración frontend integral a SPA reactiva moderna con Vue 3, TypeScript y Vite',
             'Integración con servicios AWS Cloud: Cognito (Auth), API Gateway y Lambda',
-            'Paneles de análisis y visualización de trazas de seguridad en tiempo real',
+            'Paneles de análisis y visualización de trazas de seguridad en tiempo real usados por 11 cursos universitarios',
           ],
           tech: [
             'Vue 3',
@@ -873,6 +876,11 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
             desc: 'Pull Requests • Code Review • Conflict Resolution',
             color: '#f9a9fb',
           },
+          {
+            title: 'Databases',
+            desc: 'MySQL • Relational Schema Designs',
+            color: '#00758f',
+          },
         ],
       },
       statusHelp: 'For Help, click Help Topics on the Help Menu.',
@@ -1005,7 +1013,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
 • Master in Cloud & High-Performance Computing: UPV (2023–2026)
   - Master's Thesis: End-to-end frontend migration of cloud platform
     to reactive Vue 3 / TypeScript SPA. Integration of AWS (Cognito,
-    API Gateway, Lambda) and analytical dashboards.
+    API Gateway, Lambda) and analytical dashboards used in 11 university courses.
 
 • Computer Engineering Degree (Software Major): UPV (2019–2023)
   - Bachelor's Thesis: Full-stack social platform for medical procedure
@@ -1013,15 +1021,14 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
 
 [LANGUAGES]
 • Spanish & Valencian: Native
-• English:             C1 Level (Cambridge Scale)
+• English:             C1
 • German:              B1.1
-• Japanese:            Beginner (A1)
+• Japanese:            A1
 
 [INTERESTS]
-• Digital arts & 3D modeling (Blender)
-• Foreign languages & cultures
-• LGBT community & volunteer work (DEI)
-• Hiking & outdoor adventures
+• Digital arts & 3D modeling 
+• Foreign languages
+• LGBT community & DEI
 
 [CONTACT]
 • Email:     joel.ruiz2180@gmail.com
@@ -1072,14 +1079,12 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           role: 'Junior Software Developer Intern',
           location: 'Valencia, Spain – Munich, Germany',
           bullets: [
-            'Analyzed technical specifications and user requirements to design modular, maintainable web components aligned with corporate guidelines.',
-            'Prototyped and launched a corporate branding portal, adhering to strict design guidelines and UI/UX best practices.',
-            'Authored comprehensive technical documentation and code guidelines to ensure long-term maintainability and seamless onboarding for developers.',
+            'Prototyped and launched a corporate branding portal, adhering to strict design guidelines and UI/UX best practices using JavaScript and Wordpress',
+            'Authored comprehensive technical documentation and code guidelines to ensure long-term maintainability and seamless onboarding for developers.'
           ],
           tech: [
             'WordPress',
             'JavaScript',
-            'Web Components',
             'UI/UX',
             'Technical Docs',
             'Code Guidelines',
@@ -1093,7 +1098,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           degree: 'Master’s Degree in Cloud and High-Performance Computing',
           location: 'Valencia, Spain',
           thesis:
-            'Executed an end-to-end frontend migration of a cloud platform to a reactive Vue 3 / TypeScript SPA. Integrated AWS Cloud services (AWS Cognito, API Gateway, Lambda) and designed custom analytics dashboards.',
+            'Migrated a legacy cloud platform into a modular Vue 3 / TypeScript SPA backed by AWS serverless infrastructure (Lambda, API Gateway, Cognito); built custom analytics dashboards adopted across 11 university courses.',
         },
         {
           institution: 'Universitat Politècnica de València',
@@ -1106,9 +1111,9 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
       ],
       languages: [
         { name: 'Spanish & Valencian', level: 'Native' },
-        { name: 'English', level: 'C1 Level (Cambridge Scale)' },
+        { name: 'English', level: 'C1' },
         { name: 'German', level: 'B1.1' },
-        { name: 'Japanese', level: 'Beginner (A1)' },
+        { name: 'Japanese', level: 'A1' },
       ],
       skillsSummary: {
         frontend: 'Vue 3, React, TypeScript, JavaScript, CSS, Gleam, Astro',
@@ -1119,7 +1124,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
       thesisLabel: 'Thesis:',
       interestsLabel: 'Interests:',
       interestsText:
-        'Digital arts, foreign languages, Japanese culture, volunteer in local LGBT group (DEI).',
+        'Digital arts; 3D modeling; Foreign languages; LGBT & DEI.',
       licenseLabel: "Driver's License:",
       licenseText: 'Class B',
     },
@@ -1192,7 +1197,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           title: 'CloudTrail-Tracker',
           category:
             "Master's Thesis • Cloud & High Performance Computing (UPV)",
-          badgeText: 'UPV Thesis',
+          badgeText: 'UPV Thesis: 9.5/10',
           statusText: 'Production / Cloud',
           shortDesc:
             'Reactive SPA platform for monitoring and analyzing AWS CloudTrail audit logs.',
@@ -1201,7 +1206,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           highlights: [
             'Complete frontend migration to modern reactive SPA with Vue 3, TypeScript, and Vite',
             'Full integration with AWS Cloud services: Cognito (Auth), API Gateway, and Lambda',
-            'Analytical dashboards and real-time security trace visualization',
+            'Analytical dashboards and real-time security trace visualization used across 11 university courses',
           ],
           tech: [
             'Vue 3',
@@ -1391,6 +1396,11 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
             desc: 'Pull Requests • Code Review • Konfliktlösung',
             color: '#f9a9fb',
           },
+          {
+            title: 'Databases',
+            desc: 'MySQL • Relationale Schema-Designs',
+            color: '#00758f',
+          },
         ],
       },
       statusHelp: 'Für Hilfe klicken Sie im Menü auf Hilfe.',
@@ -1516,7 +1526,7 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
 • Master Cloud & High-Performance Computing: UPV (2023–2026)
   - Masterarbeit: End-to-End-Frontend-Migration einer Cloud-Plattform
     zu einer reaktiven Vue 3 / TypeScript SPA. Integration von AWS-
-    Diensten (Cognito, API Gateway, Lambda) und Analyse-Dashboards.
+    Diensten (Cognito, API Gateway, Lambda) und Analyse-Dashboards, die in 11 Universitätskursen eingesetzt werden.
 
 • Bachelor in Informatik (Software Engineering): UPV (2019–2023)
   - Bachelorarbeit: Full-Stack-Plattform für medizinische
@@ -1524,15 +1534,14 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
 
 [SPRACHEN]
 • Spanisch & Valencianisch: Muttersprache
-• Englisch:                 C1-Niveau (Cambridge-Skala)
+• Englisch:                 C1
 • Deutsch:                  B1.1
-• Japanisch:                Anfänger (A1)
+• Japanisch:                A1
 
 [INTERESSEN]
-• Digitale Kunst & 3D-Modellierung (Blender)
+• Digitale Kunst & 3D-Modellierung
 • Fremdsprachen & Kulturen
 • LGBT-Community & Ehrenamt (DEI)
-• Wandern & Outdoor-Aktivitäten (Hiking)
 
 [KONTAKT]
 • E-Mail:    joel.ruiz2180@gmail.com
@@ -1590,7 +1599,6 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
           tech: [
             'WordPress',
             'JavaScript',
-            'Web Components',
             'UI/UX',
             'Technische Doku',
             'Code Guidelines',
@@ -1711,7 +1719,7 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
           highlights: [
             'Vollständige Frontend-Migration zu einer modernen reaktiven SPA mit Vue 3, TypeScript und Vite',
             'Umfassende Integration von AWS Cloud-Diensten: Cognito, API Gateway und Lambda',
-            'Analytische Dashboards und Echtzeit-Visualisierung von Sicherheitsspuren',
+            'Analytische Dashboards und Echtzeit-Visualisierung von Sicherheitsspuren, eingesetzt in 11 Universitätskursen',
           ],
           tech: [
             'Vue 3',
