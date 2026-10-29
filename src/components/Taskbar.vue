@@ -125,7 +125,7 @@ onUnmounted(() => {
       </a>
       <a
         class="quick-launch__item"
-        href="https://www.linkedin.com/in/joel-ruiz-bbab68240"
+        href="https://www.linkedin.com/in/joel-ruiz-carrillo-bbab68240/"
         target="_blank"
         rel="noopener noreferrer"
         title="LinkedIn"

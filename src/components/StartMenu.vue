@@ -11,7 +11,7 @@ const emit = defineEmits<{
 const { messages } = useI18n()
 
 const menuItems = [
-  { key: 'linked', icon: linkedIcon, href: 'https://www.linkedin.com/in/joel-ruiz-bbab68240' },
+  { key: 'linked', icon: linkedIcon, href: 'https://www.linkedin.com/in/joel-ruiz-carrillo-bbab68240/' },
   { key: 'git', icon: gitIcon, href: 'https://github.com/joelruicar' },
 ] as const
 
