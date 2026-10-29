@@ -121,7 +121,3 @@ The [`public/CNAME`](./public/CNAME) file preserves a custom domain when deployi
 
 This repository contains a personal portfolio and its associated resources. Please contact the author before reusing the code or visual assets.
 
-## Contact
-
-- GitHub: [github.com/joelruicar](https://github.com/joelruicar)
-- LinkedIn: [linkedin.com/in/joel-ruiz-bbab68240](https://www.linkedin.com/in/joel-ruiz-bbab68240)
