@@ -144,12 +144,6 @@ export type CvTranslation = {
   experience: CvExperience[]
   education: CvEducation[]
   languages: CvLanguage[]
-  skillsSummary: {
-    frontend: string
-    backend: string
-    cloud: string
-    cms: string
-  }
   thesisLabel: string
   interestsLabel: string
   interestsText: string
@@ -352,14 +346,19 @@ const translations: Record<Locale, Translation> = {
             color: '#bd34fe',
           },
           {
-            title: 'Git & GitHub',
-            desc: 'Pull Requests • Code Review • Resolución de conflictos',
+            title: 'Sistemas',
+            desc: 'Git • Linux • Bash • n8n',
             color: '#f9a9fb',
           },
           {
             title: 'Databases',
             desc: 'MySQL • Relational Schema Designs',
             color: '#00758f',
+          },
+          {
+            title: 'CMS',
+            desc: 'WordPress • Drupal',
+            color: '#ff9800',
           },
         ],
       },
@@ -492,14 +491,16 @@ Soy Joel, un desarrollador de software apasionado por la arquitectura web limpia
 Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicaciones de alto rendimiento, código mantenible y soluciones centradas en el usuario.
 
 [EDUCACIÓN]
-• Máster en Computación Cloud y Altas Prestaciones: UPV (2023–2026)
-  - TFM: Migración integral de plataforma cloud a SPA reactiva (Vue 3,
-    TypeScript). Integración de AWS (Cognito, API Gateway, Lambda) y
-    diseño de paneles analíticos, usados en 11 cursos universitarios.
+• Máster en Computación en la Nube y de Alto Rendimiento: UPV (graduado en 2026)
+  - TFM: Migración frontend de una plataforma académica desde una arquitectura
+    heredada hacia Vue 3 (Vite, Pinia, TypeScript) y adaptación del entorno
+    serverless en AWS (Lambda, API Gateway, Cognito, Amplify), usada en 11
+    asignaturas universitarias.
 
-• Grado en Ingeniería Informática (Mención Software): UPV (2019–2023)
-  - TFG: Plataforma social médica full-stack para consultas y
-    evaluaciones de procedimientos con React, Django y REST APIs.
+• Grado en Ingeniería Informática · Rama de Software: UPV (graduado en 2023)
+  - TFG: Diseño e implementación de una red social fullstack con React y Django
+    REST Framework, incluyendo autenticación de usuarios, gestión de contenido
+    multimedia y arquitectura desacoplada.
 
 [IDIOMAS]
 • Español & Valenciano: Nativo
@@ -529,11 +530,11 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
         {
           company: 'Universitat Politècnica de València',
           period: 'Junio 2026 – Julio 2026',
-          role: 'Software Engineering Intern',
-          location: 'Remoto',
+          role: 'Becario ingeniero de software',
+          location: 'Valencia, España',
           bullets: [
-            'Desarrollo de servicios backend y esquemas de bases de datos relacionales (MySQL, Django) para alimentar paneles analíticos de supervisión académica utilizados por +50 profesores.',
-            'Colaboración en el desarrollo de aplicaciones web con JavaScript, CSS y WordPress, entregando soluciones centradas en el usuario según especificaciones.',
+            'Diseño de esquemas relacionales en MySQL y desarrollo de servicios backend en Django para una plataforma de supervisión de exámenes utilizada por más de 50 docentes, automatizando la gestión académica y el seguimiento de evaluaciones.',
+            'Colaboración en el desarrollo de portales web institucionales utilizando JavaScript, CSS y WordPress conforme a las especificaciones de los departamentos.',
           ],
           tech: [
             'Django',
@@ -545,24 +546,24 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
           ],
         },
         {
-          company: 'Cliente Local',
+          company: 'Cliente particular',
           period: 'Marzo 2026 – Abril 2026',
-          role: 'Freelance Web Developer',
+          role: 'Desarrollador web freelance',
           location: 'Remoto',
           bullets: [
-            'Arquitectura, diseño y despliegue de una aplicación web moderna para un cliente utilizando Astro y Netlify.',
-            'Optimización del frontend logrando excelentes puntuaciones de rendimiento y velocidad de carga en Google Lighthouse.',
+            'Diseño, desarrollo y despliegue de una aplicación web utilizando Astro y Netlify.',
+            'Optimización del frontend y SEO mediante mejoras en carga, estructura y recursos web, alcanzando puntuaciones de 98/100 en Google Lighthouse.',
           ],
           tech: ['Astro', 'Netlify', 'Web Performance'],
         },
         {
           company: 'MaibornWolff GmbH',
-          period: 'Abril 2022 – Junio 2022',
-          role: 'Junior Software Developer Intern',
+          period: 'Febrero 2022 – Mayo 2022',
+          role: 'Desarrollador de software junior',
           location: 'Valencia, España – Múnich, Alemania',
           bullets: [
-            'Prototipado y lanzamiento de un portal de identidad corporativa, siguiendo estrictas directrices de diseño y las mejores prácticas de UI/UX, mediante el uso de JavaScript y WordPress.',
-            'Elaboración de documentación técnica y directrices para garantizar la mantenibilidad y facilitar la integración de nuevos desarrolladores'
+            'Prototipado y lanzamiento de un portal de identidad corporativa con JavaScript y WordPress, según directrices de equipos de producto en entornos ágiles.',
+            'Elaboración de documentación técnica y optimizaciones de código para aplicaciones en JavaScript.',
           ],
           tech: [
             'WordPress',
@@ -576,21 +577,19 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
       education: [
         {
           institution: 'Universitat Politècnica de València',
-          period: 'Sept 2023 – Sept 2026',
-          degree:
-            'Máster Universitario en Computación Cloud y Altas Prestaciones',
+          period: 'Graduado en 2026',
+          degree: 'Máster en Computación en la Nube y de Alto Rendimiento',
           location: 'Valencia, España',
           thesis:
-            'Migración de una plataforma en la nube heredada a una SPA modular desarrollada con Vue 3 y TypeScript, respaldada por una infraestructura serverless de AWS (Lambda, API Gateway, Cognito); creación de paneles de análisis personalizados adoptados en 11 cursos universitarios.',
+            'Migración frontend de una plataforma académica desde una arquitectura heredada hacia Vue 3 (Vite, Pinia, TypeScript) y adaptación del entorno serverless en AWS (Lambda, API Gateway, Cognito, Amplify), usada en 11 asignaturas universitarias.',
         },
         {
           institution: 'Universitat Politècnica de València',
-          period: 'Sept 2019 – Sept 2023',
-          degree:
-            'Grado en Ingeniería Informática (Mención Ingeniería del Software)',
+          period: 'Graduado en 2023',
+          degree: 'Grado en Ingeniería Informática · Rama de Software',
           location: 'Valencia, España',
           thesis:
-            'Desarrollo de plataforma social médica para revisiones y consultas de procedimientos utilizando React, Django y REST APIs.',
+            'Diseño e implementación de una red social fullstack con React y Django REST Framework, incluyendo autenticación de usuarios, gestión de contenido multimedia y arquitectura desacoplada.',
         },
       ],
       languages: [
@@ -599,12 +598,6 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
         { name: 'Alemán', level: 'B1.1' },
         { name: 'Japonés', level: 'A1' },
       ],
-      skillsSummary: {
-        frontend: 'Vue 3, React, TypeScript, JavaScript, CSS, Gleam, Astro',
-        backend: 'Django, REST APIs, MySQL',
-        cloud: 'AWS, Docker, Netlify, Cloudflare',
-        cms: 'WordPress, Drupal',
-      },
       thesisLabel: 'Trabajo Final:',
       interestsLabel: 'Intereses:',
       interestsText:
@@ -872,14 +865,19 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
             color: '#bd34fe',
           },
           {
-            title: 'Git & GitHub',
-            desc: 'Pull Requests • Code Review • Conflict Resolution',
+            title: 'Systems',
+            desc: 'Git • Linux • Bash • n8n',
             color: '#f9a9fb',
           },
           {
             title: 'Databases',
             desc: 'MySQL • Relational Schema Designs',
             color: '#00758f',
+          },
+          {
+            title: 'CMS',
+            desc: 'WordPress • Drupal',
+            color: '#ff9800',
           },
         ],
       },
@@ -1010,14 +1008,16 @@ I love combining clean architectural practices with playful, memorable user inte
 I focus on frontend and full-stack development, prioritizing code quality, performance, and user-centered solutions.
 
 [EDUCATION]
-• Master in Cloud & High-Performance Computing: UPV (2023–2026)
-  - Master's Thesis: End-to-end frontend migration of cloud platform
-    to reactive Vue 3 / TypeScript SPA. Integration of AWS (Cognito,
-    API Gateway, Lambda) and analytical dashboards used in 11 university courses.
+• Master in Cloud & High-Performance Computing: UPV (graduated in 2026)
+  - Master's Thesis: Frontend migration of an academic platform from a legacy
+    architecture to Vue 3 (Vite, Pinia, TypeScript) and adaptation of its AWS
+    serverless environment (Lambda, API Gateway, Cognito, Amplify), used in 11
+    university courses.
 
-• Computer Engineering Degree (Software Major): UPV (2019–2023)
-  - Bachelor's Thesis: Full-stack social platform for medical procedure
-    reviews and consultations with React, Django, and REST APIs.
+• Computer Engineering Degree · Software Major: UPV (graduated in 2023)
+  - Bachelor's Thesis: Design and implementation of a full-stack social network
+    with React and Django REST Framework, including user authentication,
+    multimedia content management, and decoupled architecture.
 
 [LANGUAGES]
 • Spanish & Valencian: Native
@@ -1047,11 +1047,11 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
         {
           company: 'Universitat Politècnica de València',
           period: 'June 2026 – July 2026',
-          role: 'Software Engineering Intern',
-          location: 'Remote',
+          role: 'Software Engineer Intern',
+          location: 'Valencia, Spain',
           bullets: [
-            'Developed backend services and relational database schemas (MySQL, Django) to power analytical monitoring dashboards for academic supervision, used by +50 professors.',
-            'Collaborated on the development of web applications using JavaScript, CSS, and WordPress, delivering user-centric solutions according to stakeholder specifications.',
+            'Designed relational schemas in MySQL and developed backend services in Django for an exam supervision platform used by more than 50 faculty members, automating academic management and assessment tracking.',
+            'Collaborated on the development of institutional web portals using JavaScript, CSS, and WordPress according to department specifications.',
           ],
           tech: [
             'Django',
@@ -1063,24 +1063,24 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           ],
         },
         {
-          company: 'Local Client',
+          company: 'Private Client',
           period: 'March 2026 – April 2026',
           role: 'Freelance Web Developer',
           location: 'Remote',
           bullets: [
-            'Architected, designed, and deployed a modern web application for a client using Astro and Netlify.',
-            'Optimized frontend for top performance scores and load times.',
+            'Designed, developed, and deployed a web application using Astro and Netlify.',
+            'Optimized the frontend and SEO through improvements to loading, structure, and web resources, achieving scores of 98/100 on Google Lighthouse.',
           ],
           tech: ['Astro', 'Netlify', 'Web Performance'],
         },
         {
           company: 'MaibornWolff GmbH',
-          period: 'April 2022 – June 2022',
-          role: 'Junior Software Developer Intern',
-          location: 'Valencia, Spain – Munich, Germany',
+          period: 'February 2022 – May 2022',
+          role: 'Junior Software Developer',
+          location: 'Valencia, Spain · Munich, Germany',
           bullets: [
-            'Prototyped and launched a corporate branding portal, adhering to strict design guidelines and UI/UX best practices using JavaScript and Wordpress',
-            'Authored comprehensive technical documentation and code guidelines to ensure long-term maintainability and seamless onboarding for developers.'
+            'Prototyped and launched a corporate identity portal with JavaScript and WordPress, following product team guidelines in agile environments.',
+            'Created technical documentation and optimized code for JavaScript applications.',
           ],
           tech: [
             'WordPress',
@@ -1094,19 +1094,19 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
       education: [
         {
           institution: 'Universitat Politècnica de València',
-          period: 'Sept 2023 – Sept 2026',
+          period: 'Graduated in 2026',
           degree: 'Master’s Degree in Cloud and High-Performance Computing',
           location: 'Valencia, Spain',
           thesis:
-            'Migrated a legacy cloud platform into a modular Vue 3 / TypeScript SPA backed by AWS serverless infrastructure (Lambda, API Gateway, Cognito); built custom analytics dashboards adopted across 11 university courses.',
+            'Migrated the frontend of an academic platform from a legacy architecture to Vue 3 (Vite, Pinia, TypeScript) and adapted its AWS serverless environment (Lambda, API Gateway, Cognito, Amplify), used in 11 university courses.',
         },
         {
           institution: 'Universitat Politècnica de València',
-          period: 'Sept 2019 – Sept 2023',
+          period: 'Graduated in 2023',
           degree: 'Computer Engineering Degree, Software Major',
           location: 'Valencia, Spain',
           thesis:
-            'Developed a full-stack social platform for medical procedure reviews and consultations using React, Django, and REST APIs.',
+            'Designed and implemented a full-stack social network with React and Django REST Framework, including user authentication, multimedia content management, and decoupled architecture.',
         },
       ],
       languages: [
@@ -1115,12 +1115,6 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
         { name: 'German', level: 'B1.1' },
         { name: 'Japanese', level: 'A1' },
       ],
-      skillsSummary: {
-        frontend: 'Vue 3, React, TypeScript, JavaScript, CSS, Gleam, Astro',
-        backend: 'Django, REST APIs, MySQL',
-        cloud: 'AWS, Docker, Netlify, Cloudflare',
-        cms: 'WordPress, Drupal',
-      },
       thesisLabel: 'Thesis:',
       interestsLabel: 'Interests:',
       interestsText:
@@ -1392,14 +1386,19 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
             color: '#bd34fe',
           },
           {
-            title: 'Git & GitHub',
-            desc: 'Pull Requests • Code Review • Konfliktlösung',
+            title: 'Systeme',
+            desc: 'Git • Linux • Bash • n8n',
             color: '#f9a9fb',
           },
           {
             title: 'Databases',
             desc: 'MySQL • Relationale Schema-Designs',
             color: '#00758f',
+          },
+          {
+            title: 'CMS',
+            desc: 'WordPress • Drupal',
+            color: '#ff9800',
           },
         ],
       },
@@ -1523,14 +1522,17 @@ Ich bin Joel, ein Softwareentwickler mit Leidenschaft für saubere Webarchitektu
 Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalität, Performance und benutzerzentrierte Lösungen im Mittelpunkt stehen.
 
 [AUSBILDUNG]
-• Master Cloud & High-Performance Computing: UPV (2023–2026)
-  - Masterarbeit: End-to-End-Frontend-Migration einer Cloud-Plattform
-    zu einer reaktiven Vue 3 / TypeScript SPA. Integration von AWS-
-    Diensten (Cognito, API Gateway, Lambda) und Analyse-Dashboards, die in 11 Universitätskursen eingesetzt werden.
+• Master in Cloud- und Hochleistungs-Computing: UPV (Abschluss 2026)
+  - Masterarbeit: Frontend-Migration einer akademischen Plattform von einer
+    Legacy-Architektur zu Vue 3 (Vite, Pinia, TypeScript) und Anpassung der
+    serverlosen AWS-Umgebung (Lambda, API Gateway, Cognito, Amplify), eingesetzt
+    in 11 Universitätsfächern.
 
-• Bachelor in Informatik (Software Engineering): UPV (2019–2023)
-  - Bachelorarbeit: Full-Stack-Plattform für medizinische
-    Verfahrensbewertungen mit React, Django und REST-APIs.
+• Bachelor in Informatik · Schwerpunkt Software: UPV (Abschluss 2023)
+  - Bachelorarbeit: Entwurf und Implementierung eines Full-Stack-sozialen
+    Netzwerks mit React und Django REST Framework einschließlich
+    Benutzerauthentifizierung, Verwaltung multimedialer Inhalte und entkoppelter
+    Architektur.
 
 [SPRACHEN]
 • Spanisch & Valencianisch: Muttersprache
@@ -1560,11 +1562,11 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
         {
           company: 'Universitat Politècnica de València',
           period: 'Juni 2026 – Juli 2026',
-          role: 'Software Engineering Praktikant',
-          location: 'Remote',
+          role: 'Softwareentwickler-Praktikant',
+          location: 'Valencia, Spanien',
           bullets: [
-            'Entwicklung von Backend-Diensten und relationalen Datenbankschemata (MySQL, Django) für analytische Überwachungs-Dashboards in der akademischen Betreuung (+50 Professoren).',
-            'Zusammenarbeit bei der Entwicklung von Webanwendungen mit JavaScript, CSS und WordPress nach Stakeholder-Spezifikationen.',
+            'Entwurf relationaler Schemata in MySQL und Entwicklung von Backend-Diensten in Django für eine Prüfungsüberwachungsplattform, die von mehr als 50 Lehrkräften genutzt wird, zur Automatisierung der akademischen Verwaltung und Bewertungsverfolgung.',
+            'Mitarbeit an der Entwicklung institutioneller Webportale mit JavaScript, CSS und WordPress gemäß den Spezifikationen der Abteilungen.',
           ],
           tech: [
             'Django',
@@ -1576,25 +1578,24 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
           ],
         },
         {
-          company: 'Lokaler Kunde',
+          company: 'Privatkunde',
           period: 'März 2026 – April 2026',
           role: 'Freiberuflicher Webentwickler',
           location: 'Remote',
           bullets: [
-            'Architektur, Entwurf und Bereitstellung einer modernen Webanwendung für einen Kunden mit Astro und Netlify.',
-            'Frontend-Optimierung für erstklassige Performance- und Ladezeitwerte.',
+            'Entwurf, Entwicklung und Bereitstellung einer Webanwendung mit Astro und Netlify.',
+            'Optimierung von Frontend und SEO durch Verbesserungen bei Ladezeit, Struktur und Webressourcen mit einer Bewertung von 98/100 bei Google Lighthouse.',
           ],
           tech: ['Astro', 'Netlify', 'Web-Performance'],
         },
         {
           company: 'MaibornWolff GmbH',
-          period: 'April 2022 – Juni 2022',
-          role: 'Junior Softwareentwickler Praktikant',
-          location: 'Valencia, Spanien – München, Deutschland',
+          period: 'Februar 2022 – Mai 2022',
+          role: 'Junior-Softwareentwickler',
+          location: 'Valencia, Spanien · München, Deutschland',
           bullets: [
-            'Analyse technischer Spezifikationen und Benutzeranforderungen zur Erstellung modularer, wartungsfreundlicher Webkomponenten gemäß Unternehmensrichtlinien.',
-            'Prototyping und Einführung eines Corporate-Branding-Portals unter Einhaltung strenger Design- und UI/UX-Richtlinien.',
-            'Erstellung umfassender technischer Dokumentationen und Code-Richtlinien zur Sicherstellung der Wartbarkeit und des reibungslosen Onboardings.',
+            'Prototyping und Einführung eines Corporate-Identity-Portals mit JavaScript und WordPress gemäß den Richtlinien von Produktteams in agilen Umgebungen.',
+            'Erstellung technischer Dokumentation und Optimierung des Codes für JavaScript-Anwendungen.',
           ],
           tech: [
             'WordPress',
@@ -1608,19 +1609,19 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
       education: [
         {
           institution: 'Universitat Politècnica de València',
-          period: 'Sept 2023 – Sept 2026',
+          period: 'Abschluss 2026',
           degree: 'Master in Cloud und High-Performance Computing',
           location: 'Valencia, Spanien',
           thesis:
-            'End-to-End-Frontend-Migration einer Cloud-Plattform zu einer reaktiven Vue 3 / TypeScript SPA. Integration von AWS-Cloud-Diensten (Cognito, API Gateway, Lambda) und Design von Analyse-Dashboards.',
+            'Frontend-Migration einer akademischen Plattform von einer Legacy-Architektur zu Vue 3 (Vite, Pinia, TypeScript) und Anpassung der serverlosen AWS-Umgebung (Lambda, API Gateway, Cognito, Amplify), die in 11 Universitätsfächern eingesetzt wird.',
         },
         {
           institution: 'Universitat Politècnica de València',
-          period: 'Sept 2019 – Sept 2023',
+          period: 'Abschluss 2023',
           degree: 'Bachelor in Informatik (Schwerpunkt Software Engineering)',
           location: 'Valencia, Spanien',
           thesis:
-            'Full-Stack-Plattform für medizinische Verfahrensbewertungen und -beratungen mit React, Django und REST-APIs.',
+            'Entwurf und Implementierung eines Full-Stack-sozialen Netzwerks mit React und Django REST Framework einschließlich Benutzerauthentifizierung, Verwaltung multimedialer Inhalte und entkoppelter Architektur.',
         },
       ],
       languages: [
@@ -1629,12 +1630,6 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
         { name: 'Deutsch', level: 'B1.1' },
         { name: 'Japanisch', level: 'Anfänger (A1)' },
       ],
-      skillsSummary: {
-        frontend: 'Vue 3, React, TypeScript, JavaScript, CSS, Gleam, Astro',
-        backend: 'Django, REST APIs, MySQL',
-        cloud: 'AWS, Docker, Netlify, Cloudflare',
-        cms: 'WordPress, Drupal',
-      },
       thesisLabel: 'Abschlussarbeit:',
       interestsLabel: 'Interessen:',
       interestsText:
