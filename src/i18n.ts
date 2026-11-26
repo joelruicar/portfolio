@@ -634,7 +634,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
         modified: 'Fecha',
       },
       status: {
-        itemsCount: '4 objeto(s)',
+        itemsCount: '5 objeto(s)',
         selectedCount: '1 objeto seleccionado',
         fileSystem: 'Sistema FAT32',
       },
@@ -665,7 +665,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
         heading: 'Microsoft® Windows® 95 Explorer',
         subheading: 'Explorador de Proyectos - Portfolio Edition',
         dev: 'Desarrollador: Joel Ruiz (@joelruicar)',
-        version: 'Versión 4.0.950 (Proyectos destacados: 4)',
+        version: 'Versión 4.0.950 (Proyectos destacados: 5)',
         okBtn: 'Aceptar',
       },
       items: [
@@ -736,7 +736,7 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
           shortDesc:
             'Portfolio interactivo fiel a Windows 95 con ventanas arrastrables, apps funcionales e i18n.',
           fullDesc:
-            'Portfolio interactivo diseñado como un clon fiel del sistema operativo Windows 95. Desarrollado con Vue 3, Pinia y TypeScript. Incluye gestión completa de ventanas (arrastrar, redimensionar, minimizar, maximizar, z-index), barra de tareas, menú de inicio, soporte multi-idioma (ES/EN/DE), editor de texto funcional y clon de Buscaminas.',
+            'Portfolio interactivo diseñado como un clon fiel del sistema operativo Windows 95. Desarrollado con Vue 3, Pinia y TypeScript. Incluye gestión completa de ventanas (arrastrar, redimensionar, minimizar, maximizar, z-index), barra de tareas, menú de inicio, soporte multi-idioma (ES/EN/DE), editor de texto funcional, MS Paint y clon de Buscaminas.',
           highlights: [
             'Gestor de ventanas propio con soporte para arrastrar, redimensionar y z-index',
             'Internacionalización reactiva en tiempo real (Español, Inglés y Alemán)',
@@ -783,6 +783,27 @@ Me especializo en el desarrollo frontend y full-stack, con foco en crear aplicac
           fileSize: '850 KB',
           modifiedDate: '2024-09-10',
           typeDesc: 'Cliente Web de IA Local',
+        },
+        {
+          id: 'chess',
+          title: 'Chess',
+          category: 'Python • Cliente de ajedrez con Pygame',
+          badgeText: 'Python + Pygame',
+          statusText: 'Escritorio / Local y online',
+          shortDesc:
+            'Cliente de ajedrez de escritorio con partidas locales y multijugador online.',
+          fullDesc:
+            'Cliente de ajedrez desarrollado con Pygame que permite jugar partidas locales o en salas multijugador online. El servidor Python autoritativo asigna los colores, valida los movimientos y los retransmite a ambos jugadores mediante WebSocket. También permite crear clientes independientes para Windows y Linux.',
+          highlights: [
+            'Partidas locales con controles para mover piezas, cambiar el tema y reiniciar',
+            'Multijugador online con salas para dos jugadores y validación de movimientos en el servidor',
+            'Clientes independientes para Windows y Linux, distribuibles sin instalar Python',
+          ],
+          tech: ['Python', 'Pygame', 'WebSockets', 'Docker'],
+          githubUrl: 'https://github.com/joelruicar/Chess',
+          fileSize: '664 KB',
+          modifiedDate: '2026-10-31',
+          typeDesc: 'Aplicación de escritorio (Python)',
         },
       ],
     },
@@ -1151,7 +1172,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
         modified: 'Date Modified',
       },
       status: {
-        itemsCount: '4 object(s)',
+        itemsCount: '5 object(s)',
         selectedCount: '1 object selected',
         fileSystem: 'FAT32 File System',
       },
@@ -1182,7 +1203,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
         heading: 'Microsoft® Windows® 95 Explorer',
         subheading: 'Projects Explorer - Portfolio Edition',
         dev: 'Developer: Joel Ruiz (@joelruicar)',
-        version: 'Version 4.0.950 (Featured Projects: 4)',
+        version: 'Version 4.0.950 (Featured Projects: 5)',
         okBtn: 'OK',
       },
       items: [
@@ -1254,7 +1275,7 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           shortDesc:
             'Faithful Windows 95 interactive portfolio with draggable windows, functional apps, and i18n.',
           fullDesc:
-            'Interactive portfolio designed as a faithful recreation of the Windows 95 operating system. Built with Vue 3, Pinia, and TypeScript. Includes comprehensive window management (drag, resize, minimize, maximize, z-index), taskbar, start menu, multi-language internationalization (ES/EN/DE), functional text editor, and Minesweeper clone.',
+            'Interactive portfolio designed as a faithful recreation of the Windows 95 operating system. Built with Vue 3, Pinia, and TypeScript. Includes comprehensive window management (drag, resize, minimize, maximize, z-index), taskbar, start menu, multi-language internationalization (ES/EN/DE), functional text editor, MS Paint, and Minesweeper clone.',
           highlights: [
             'Custom window manager with drag, resize, minimize, maximize, and z-index ordering',
             'Real-time multi-language internationalization (Spanish, English, and German)',
@@ -1301,6 +1322,27 @@ I focus on frontend and full-stack development, prioritizing code quality, perfo
           fileSize: '850 KB',
           modifiedDate: '2024-09-10',
           typeDesc: 'Local AI Web Client',
+        },
+        {
+          id: 'chess',
+          title: 'Chess',
+          category: 'Python • Pygame chess client',
+          badgeText: 'Python + Pygame',
+          statusText: 'Desktop / Local & online',
+          shortDesc:
+            'Desktop chess client with local games and online multiplayer.',
+          fullDesc:
+            'A Pygame chess client for local games and online multiplayer rooms. The authoritative Python server assigns colors, validates moves, and broadcasts them to both players over WebSocket. Standalone clients can also be built for Windows and Linux.',
+          highlights: [
+            'Local games with controls to move pieces, change the theme, and reset',
+            'Online multiplayer rooms for two players with server-side move validation',
+            'Standalone Windows and Linux clients that do not require a Python installation',
+          ],
+          tech: ['Python', 'Pygame', 'WebSockets', 'Docker'],
+          githubUrl: 'https://github.com/joelruicar/Chess',
+          fileSize: '664 KB',
+          modifiedDate: '2026-10-31',
+          typeDesc: 'Desktop Application (Python)',
         },
       ],
     },
@@ -1666,7 +1708,7 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
         modified: 'Änderungsdatum',
       },
       status: {
-        itemsCount: '4 Objekt(e)',
+        itemsCount: '5 Objekt(e)',
         selectedCount: '1 Objekt ausgewählt',
         fileSystem: 'FAT32-Dateisystem',
       },
@@ -1697,7 +1739,7 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
         heading: 'Microsoft® Windows® 95 Explorer',
         subheading: 'Projekt-Explorer - Portfolio Edition',
         dev: 'Entwickler: Joel Ruiz (@joelruicar)',
-        version: 'Version 4.0.950 (Vorgestellte Projekte: 4)',
+        version: 'Version 4.0.950 (Vorgestellte Projekte: 5)',
         okBtn: 'OK',
       },
       items: [
@@ -1768,7 +1810,7 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
           shortDesc:
             'Detailgetreues Windows 95-Portfolio mit verschiebbaren Fenstern, funktionalen Apps und i18n.',
           fullDesc:
-            'Interaktives Web-Portfolio als originalgetreue Nachbildung des Windows 95-Betriebssystems. Entwickelt mit Vue 3, Pinia und TypeScript. Beinhaltet ein vollständiges Fenstermanagement (Ziehen, Skalieren, Minimieren, Maximieren, z-Index), Taskleiste, Startmenü, Mehrsprachigkeit (ES/EN/DE), Texteditor und Minesweeper-Klon.',
+            'Interaktives Web-Portfolio als originalgetreue Nachbildung des Windows 95-Betriebssystems. Entwickelt mit Vue 3, Pinia und TypeScript. Beinhaltet ein vollständiges Fenstermanagement (Ziehen, Skalieren, Minimieren, Maximieren, z-Index), Taskleiste, Startmenü, Mehrsprachigkeit (ES/EN/DE), Texteditor, MS Paint und Minesweeper-Klon.',
           highlights: [
             'Eigener Fenstermanager mit Zieh-, Größenänderungs- und z-Index-Unterstützung',
             'Reaktive Mehrsprachigkeit in Echtzeit (Spanisch, Englisch und Deutsch)',
@@ -1815,6 +1857,27 @@ Mein Fokus liegt auf der Frontend- und Full-Stack-Entwicklung, wobei Codequalit�
           fileSize: '850 KB',
           modifiedDate: '2024-09-10',
           typeDesc: 'Lokaler KI-Webclient',
+        },
+        {
+          id: 'chess',
+          title: 'Chess',
+          category: 'Python • Schach-Client mit Pygame',
+          badgeText: 'Python + Pygame',
+          statusText: 'Desktop / Lokal & online',
+          shortDesc:
+            'Schach-Desktop-Client mit lokalen Partien und Online-Mehrspieler.',
+          fullDesc:
+            'Ein mit Pygame entwickelter Schach-Client für lokale Partien und Online-Mehrspielerräume. Der autoritative Python-Server weist die Farben zu, validiert die Züge und überträgt sie per WebSocket an beide Spieler. Außerdem können eigenständige Clients für Windows und Linux erstellt werden.',
+          highlights: [
+            'Lokale Partien mit Steuerung zum Ziehen der Figuren, Ändern des Designs und Neustarten',
+            'Online-Mehrspielerräume für zwei Spieler mit serverseitiger Zugvalidierung',
+            'Eigenständige Windows- und Linux-Clients, die keine Python-Installation benötigen',
+          ],
+          tech: ['Python', 'Pygame', 'WebSockets', 'Docker'],
+          githubUrl: 'https://github.com/joelruicar/Chess',
+          fileSize: '664 KB',
+          modifiedDate: '2026-10-31',
+          typeDesc: 'Desktop-Anwendung (Python)',
         },
       ],
     },

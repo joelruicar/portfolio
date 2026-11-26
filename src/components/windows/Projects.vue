@@ -8,10 +8,12 @@ import gitIcon from '../../assets/git.ico'
 import windowsLogo from '../../assets/windowslogo.png'
 import cttIcon from '../../assets/CTT.ico'
 import frigleamIcon from '../../assets/frigleam.ico'
+import chessIcon from '../../assets/chess.ico'
 import cttImg from '../../assets/CTT.png'
 import frigleamImg from '../../assets/frigleam.png'
 import deskImg from '../../assets/desk.jpg'
 import ollamaImg from '../../assets/ollama.png'
+import chessImg from '../../assets/chess.png'
 
 const emit = defineEmits<{
   close: []
@@ -35,6 +37,7 @@ const projectIcons: Record<string, string> = {
   frigleam: frigleamIcon,
   portfolio: explorerIcon,
   ollama: promptIcon,
+  chess: chessIcon,
 }
 
 // Project images map
@@ -43,6 +46,7 @@ const projectImages: Record<string, string | null> = {
   frigleam: frigleamImg,
   portfolio: deskImg,
   ollama: ollamaImg,
+  chess: chessImg,
 }
 
 // Current projects list from i18n
