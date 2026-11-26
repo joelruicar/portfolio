@@ -270,7 +270,9 @@ onUnmounted(() => {
 
 .window--compact {
   width: fit-content;
+  height: fit-content;
   min-width: 0;
+  min-height: 0;
 }
 
 .window__titlebar {
@@ -409,6 +411,7 @@ onUnmounted(() => {
   background: #fff;
 }
 .window--compact .window__body {
+  flex: 0 0 auto;
   padding: 0;
   background: #c3c3c3;
 }
@@ -422,9 +425,9 @@ onUnmounted(() => {
   }
 
   .window--compact {
-    width: min(94vw, 380px);
-    height: min(74dvh, 500px);
-    min-height: 300px;
+    width: fit-content;
+    height: fit-content;
+    min-height: 0;
   }
 }
 </style>
